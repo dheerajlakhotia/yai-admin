@@ -24,7 +24,7 @@ Clone the repository to your local machine.
 
 bash
 Copy code
-git clone https://github.com/your-username/ngo-admin-panel-php.git
+git clone https://github.com/dheerajlakhotia/yai-admin.git
 Configure your web server to serve the PHP application.
 
 Set up the necessary database configurations using the provided schema and configuration files.
