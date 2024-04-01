@@ -1,4 +1,4 @@
-<h1> NGO Admin Panel - PHP Edition </h1>
+NGO Admin Panel - PHP Edition
 Welcome to the NGO Admin Panel repository – a robust administration tool tailored for Non-Governmental Organizations (NGOs) built entirely in PHP. This admin panel empowers administrators with a wide array of features, offering a user-friendly interface to efficiently manage and streamline your organization's operations.
 
 Features
@@ -24,7 +24,7 @@ Clone the repository to your local machine.
 
 bash
 Copy code
-git clone https://github.com/your-username/ngo-admin-panel-php.git
+git clone https://github.com/dheerajlakhotia/yai-admin.git
 Configure your web server to serve the PHP application.
 
 Set up the necessary database configurations using the provided schema and configuration files.
