@@ -3,16 +3,46 @@
 
     <div class="d-flex align-items-center justify-content-between">
         <a href="index.php" class="logo d-flex align-items-center">
-            <img src="assets/img/logo.png" alt="">
-            <span class="d-none d-lg-block">NiceAdmin</span>
+            <img src="assets/img/logo.jpg" alt="" style="border-radius: 50%;">
+            <span class="d-none d-lg-block">YAI</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
 
     <nav class="header-nav ms-auto">
-        <ul class="d-flex align-items-center">
 
+        <ul class="d-flex align-items-center">
+            <!-- Notification Icon -->
+            <li class="nav-item dropdown pe-3">
+                <a class="nav-link" href="#" id="notificationsDropdown" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <i class="bi bi-bell"></i>
+                    <!-- Notification Badge -->
+                    <span class="badge bg-danger">3</span>
+                </a>
+
+                <!-- Notification Dropdown -->
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" aria-labelledby="notificationsDropdown">
+                    <!-- Notification Items -->
+
+                    <li>
+                        <a class="dropdown-item notification-item" href="#">
+                            Notification 1
+                            <!-- Close Icon for Notification Item -->
+                            <button type="button" class="btn-close" aria-label="Close"></button>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item notification-item" href="#">
+                            Notification 2
+                            <!-- Close Icon for Notification Item -->
+                            <button type="button" class="btn-close" aria-label="Close"></button>
+                        </a>
+                    </li>
+                    <!-- End Notification Items -->
+                </ul><!-- End Notification Dropdown -->
+            </li><!-- End Notification Nav -->
 
             <li class="nav-item dropdown pe-3">
 
@@ -45,7 +75,7 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="pages-faq.php">
+                        <a class="dropdown-item d-flex align-items-center" href="faq.php">
                             <i class="bi bi-question-circle"></i>
                             <span>Need Help?</span>
                         </a>

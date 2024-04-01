@@ -1,3 +1,30 @@
+<?php
+$active_page = basename($_SERVER['PHP_SELF'], ".php");
+
+// Define an array to map page names to their corresponding titles
+$page_titles = array(
+    'index' => 'Dashboard',
+    'users-profile' => 'Profile',
+    'about' => 'About',
+    'activity' => 'Activity',
+    'volenteer' => 'Volunteer',
+    'internship' => 'Internship',
+    'donation' => 'Donation',
+    'blog' => 'Blog',
+    'gallery' => 'Gallery',
+    'event' => 'Events',
+    'location' => 'Locations',
+    'contact' => 'Contact',
+    'faq' => 'F.A.Q',
+    'suggetion' => 'Suggetion',
+    'logout' => 'Logout'
+);
+
+// If the active page exists in the array, set its title dynamically
+$page_title = isset($page_titles[$active_page]) ? $page_titles[$active_page] : 'YAI'; // Default to 'YAI' if the page title is not found
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,13 +32,12 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Dashboard - YAI</title>
+    <title><?php echo $page_title; ?> - YAI</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="assets/img/favicon.ico" rel="icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
