@@ -480,7 +480,7 @@
             </div>
             <div class="container">
 
-                <h5 class="card-title">Daily Drive</h5>
+                <h5 class="card-title">Today Drive</h5>
                 <div class="row">
                     <div class="col-12">
                         <div class="list-group" id="list-tab" role="tablist">

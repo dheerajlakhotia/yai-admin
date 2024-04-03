@@ -48,6 +48,111 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 </script>
+<script>
+document.getElementById('edit-icon').addEventListener('click', function() {
+    document.getElementById('image-input').click();
+});
+
+function submitForm() {
+    document.querySelector('form').submit();
+}
+</script>
+
+<script>
+document.getElementById('image').addEventListener('change', function() {
+    var files = this.files;
+    var previewContainer = document.getElementById('image-preview-container');
+    previewContainer.innerHTML = ''; // Clear previous previews
+
+    if (files.length > 5) {
+        alert("You can upload maximum 5 images.");
+        this.value = ''; // Clear selected files
+        return;
+    }
+
+    for (var i = 0; i < files.length; i++) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var img = document.createElement('img');
+            img.src = e.target.result;
+            img.style.maxWidth = '200px';
+            img.style.marginRight = '5px';
+            img.style.marginBottom = '5px';
+            previewContainer.appendChild(img);
+
+            var removeIcon = document.createElement('i');
+            removeIcon.className = 'bi bi-x-circle-fill remove-icon';
+            removeIcon.addEventListener('click', function() {
+                previewContainer.removeChild(img);
+                previewContainer.removeChild(removeIcon);
+                document.getElementById('image').value = ''; // Clear selected file
+            });
+            previewContainer.appendChild(removeIcon);
+        }
+        reader.readAsDataURL(files[i]);
+    }
+});
+
+document.getElementById('activity-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    var description = document.getElementById('description').value;
+    var imageFiles = document.getElementById('image').files;
+
+    // Here you can send the description and imageFiles to the server using AJAX or any other method.
+    // For demonstration, I'm just logging the values to the console.
+    console.log("Description:", description);
+    console.log("Image Files:", imageFiles);
+});
+</script>
+
+<script>
+function previewImage(event) {
+    var input = event.target;
+    var preview = document.getElementById('preview');
+    var imagePreview = document.getElementById('imagePreview');
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+            imagePreview.style.display = 'block';
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function deleteImage() {
+    var preview = document.getElementById('preview');
+    var imagePreview = document.getElementById('imagePreview');
+    var inputImage = document.getElementById('exampleInputImage');
+
+    preview.src = '';
+    inputImage.value = '';
+    imagePreview.style.display = 'none';
+}
+</script>
+
+<script>
+function previewIdProof(event) {
+    var input = event.target;
+    var preview = document.getElementById('idProofPreviewImg');
+    var previewDiv = document.getElementById('idProofPreview');
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+            previewDiv.style.display = 'block';
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
+
 </body>
 
 </html>

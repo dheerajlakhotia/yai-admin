@@ -31,6 +31,20 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="exampleInputImage">Upload Image <span
+                                            style="color: red;">*</span></label>
+                                    <input type="file" class="form-control-file" id="exampleInputImage"
+                                        name="imageUpload" onchange="previewImage(event)">
+                                </div>
+
+                                <div id="imagePreview" class="mb-3" style="display: none;">
+                                    <img id="preview" src="" alt="Image Preview"
+                                        style="max-width: 100px; max-height: 100px;">
+                                    <button type="button" class="btn btn-outline-danger btn-sm ml-2"
+                                        onclick="deleteImage()">Delete</button>
+                                </div>
+
+                                <div class="form-group">
                                     <label>Gender <span style="color: red;">*</span></label><br>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="inlineRadioOptions"
@@ -101,10 +115,17 @@
 
                                 <div class="form-group">
                                     <label for="idProof">Upload ID Proof <span style="color: red;">*</span></label>
-                                    <input type="file" class="form-control-file" id="idProof" name="idProof">
+                                    <input type="file" class="form-control-file" id="idProof" name="idProof"
+                                        onchange="previewIdProof(event)">
                                     <small class="form-text text-muted">Please upload a valid ID proof (e.g., Passport,
-                                        Driver's License,
-                                        National ID).</small>
+                                        Driver's License, National ID).</small>
+                                </div>
+
+                                <div id="idProofPreview" class="mb-3" style="display: none;">
+                                    <img id="idProofPreviewImg" src="" alt="ID Proof Preview"
+                                        style="max-width: 100px; max-height: 100px;">
+                                    <button type="button" class="btn btn-outline-danger btn-sm ml-2"
+                                        onclick="deleteImage('idProof')">Delete</button>
                                 </div>
 
                                 <div class="form-group">
@@ -144,48 +165,48 @@
         <div class="card-body">
             <h5 class="card-title">All YAI Members Details</h5>
 
-            <!-- Default Table -->
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">S.No</th>
-                        <th scope="col">Role</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Gender</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Phone</th>
-                        <th scope="col">Address</th>
-                        <th scope="col">DOB</th>
-                        <th scope="col">Occupation</th>
-                        <th scope="col">ID</th>
-                        <th scope="col">Hobbies</th>
-                        <th scope="col">Password</th>
-                        <th scope="col">Oprations</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td scope="row">Volenteer</td>
-                        <td>Brandon Jacob</td>
-                        <td>Male</td>
-                        <td>abc@gmail.com</td>
-                        <td>987654321</td>
-                        <td>xyz</td>
-                        <td>11-08-2001</td>
-                        <td>studend</td>
-                        <td>aadhar</td>
-                        <td>sb</td>
-                        <td>bdvfbc</td>
-                        <td>
-                            <button type="submit" class="btn btn-primary">Edit</button>
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </td>
-                    </tr>
+            <form method="get" action="">
+                <div class="row mb-3">
+                    <div class="col">
+                        <input type="text" name="search" class="form-control" placeholder="Search..."
+                            value="<?php echo isset($_GET['search']) ? $_GET['search'] : '' ?>">
+                    </div>
+                    <div class="col-auto">
+                        <input type="submit" class="btn btn-primary" value="Search">
+                    </div>
+                </div>
+            </form>
 
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">S.No</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Operations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Brandon Jacob</td>
+                            <td>
+                                <!-- Edit icon -->
+                                <a href="#" class="btn btn-link">
+                                    <i class="bi bi-pencil-fill"></i>
+                                </a>
 
-                </tbody>
-            </table>
+                                <!-- Delete icon with red color -->
+                                <a href="#" class="btn btn-link">
+                                    <i class="bi bi-trash-fill" style="color: red;"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <!-- More rows... -->
+                    </tbody>
+                </table>
+            </div>
+
             <!-- End Default Table Example -->
         </div>
     </div>

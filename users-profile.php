@@ -22,12 +22,16 @@
 
                 <div class="card">
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-
-                        <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                        <img id="profile-image" src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                        <form action="upload.php" method="post" enctype="multipart/form-data" style="display: none;">
+                            <input type="file" name="profile_image" id="image-input" onchange="submitForm()">
+                        </form>
+                        <i id="edit-icon" class="bi bi-pencil-fill edit-icon">Change Image</i>
                         <h2>Kevin Anderson</h2>
-                        <h3>Volenteer</h3>
+                        <h3>Volunteer</h3>
                     </div>
                 </div>
+
 
             </div>
 

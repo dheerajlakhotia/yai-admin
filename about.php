@@ -41,30 +41,25 @@
 
     </div><!-- End container-fluid -->
     <div class="card-body">
-        <h5 class="card-title">Default Table</h5>
+        <h5 class="card-title">Edit About Us</h5>
 
         <!-- Default Table -->
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">S.no</th>
                     <th scope="col">Title</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Image</th>
                     <th scope="col">Opration</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, reiciendis!</td>
-                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi accusantium dignissimos
-                        dolorem veniam autem eos enim natus quis tempore molestias!</td>
-                    <td>Image</td>
+                    <td>Lorem ipsum dolor sit...</td>
                     <td>
-                        <button type="submit" class="btn btn-primary">Edit</button>
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <a href="#" class="mx-3"><i class="bi bi-pencil"></i></a>
+                        <a href="#"><i class="bi bi-trash" style="color: red;"></i></a>
+
                     </td>
+
                 </tr>
 
             </tbody>
