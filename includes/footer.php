@@ -153,6 +153,33 @@ function previewIdProof(event) {
 }
 </script>
 
+<script>
+function openFileUpload() {
+    // Trigger the click event of the hidden file input element
+    document.getElementById('fileUpload').click();
+}
+
+// Handle file selection
+document.getElementById('fileUpload').addEventListener('change', function(event) {
+    var files = event.target.files;
+    var selectedFilesDiv = document.getElementById('selectedFiles');
+
+    // Clear previous selection
+    selectedFilesDiv.innerHTML = '';
+
+    // Display selected file names
+    for (var i = 0; i < files.length; i++) {
+        var fileName = files[i].name;
+        var fileListItem = document.createElement('p');
+        fileListItem.textContent = fileName;
+        selectedFilesDiv.appendChild(fileListItem);
+    }
+});
+</script>
+
+
+
+
 </body>
 
 </html>
