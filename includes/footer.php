@@ -178,7 +178,24 @@ document.getElementById('fileUpload').addEventListener('change', function(event)
 </script>
 
 
+<script>
+const galleryElement = document.getElementById('gallery');
 
+// Delete all images from the gallery
+document.getElementById('deleteAllBtn').addEventListener('click', function() {
+    galleryElement.innerHTML = '';
+    // Call a function to handle backend delete operation here (using AJAX or form submission)
+});
+
+// Delete selected images from the gallery
+document.getElementById('deleteSelectedBtn').addEventListener('click', function() {
+    const selectedImages = galleryElement.querySelectorAll('img');
+    selectedImages.forEach(image => {
+        image.remove(); // Remove the image
+    });
+    // Call a function to handle backend delete operation for selected images here (using AJAX or form submission)
+});
+</script>
 
 </body>
 
