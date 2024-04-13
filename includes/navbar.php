@@ -13,36 +13,7 @@
     <nav class="header-nav ms-auto">
 
         <ul class="d-flex align-items-center">
-            <!-- Notification Icon -->
-            <li class="nav-item dropdown pe-3">
-                <a class="nav-link" href="#" id="notificationsDropdown" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    <i class="bi bi-bell"></i>
-                    <!-- Notification Badge -->
-                    <span class="badge bg-danger">3</span>
-                </a>
 
-                <!-- Notification Dropdown -->
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" aria-labelledby="notificationsDropdown">
-                    <!-- Notification Items -->
-
-                    <li>
-                        <a class="dropdown-item notification-item" href="#">
-                            Notification 1
-                            <!-- Close Icon for Notification Item -->
-                            <button type="button" class="btn-close" aria-label="Close"></button>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item notification-item" href="#">
-                            Notification 2
-                            <!-- Close Icon for Notification Item -->
-                            <button type="button" class="btn-close" aria-label="Close"></button>
-                        </a>
-                    </li>
-                    <!-- End Notification Items -->
-                </ul><!-- End Notification Dropdown -->
-            </li><!-- End Notification Nav -->
 
             <li class="nav-item dropdown pe-3">
 

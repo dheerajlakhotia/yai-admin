@@ -197,6 +197,45 @@ document.getElementById('deleteSelectedBtn').addEventListener('click', function(
 });
 </script>
 
+
+<script>
+document.getElementById("image").addEventListener("change", function(event) {
+    const previewContainer = document.getElementById("imagePreview");
+    previewContainer.innerHTML = "";
+
+    const files = event.target.files;
+
+    if (files) {
+        [...files].forEach(file => {
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    const img = document.createElement("img");
+                    img.src = e.target.result;
+                    img.className = "img-thumbnail mr-2"; // Added 'img-thumbnail' class
+                    img.style.maxWidth = "100px"; // Added max width for smaller preview
+                    img.style.maxHeight = "100px"; // Added max height for smaller preview
+                    previewContainer.appendChild(img);
+
+                    const closeButton = document.createElement("button");
+                    closeButton.className = "btn btn-danger btn-sm";
+                    closeButton.innerHTML = "<span class='bi bi-x'></span>"; // Bootstrap icon
+                    closeButton.onclick = function() {
+                        previewContainer.removeChild(img);
+                        previewContainer.removeChild(closeButton);
+                        document.getElementById("image").value = null;
+                    };
+                    previewContainer.appendChild(closeButton);
+                };
+
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+});
+</script>
+
 </body>
 
 </html>

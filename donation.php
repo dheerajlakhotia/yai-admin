@@ -5,6 +5,15 @@
 <?php require'includes/sidebar.php'?>
 
 <main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Donation</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                <li class="breadcrumb-item active">Donation</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
 
     <h1>Recent Donation</h1>
     <div class="row row-cols-1 row-cols-md-4 g-4">
@@ -95,7 +104,7 @@
         <div class="col-md-6 my-4">
             <input type="text" class="form-control" id="searchInput" placeholder="Search by Donor Name">
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 mt-4">
             <select class="form-select" id="filterBy">
                 <option value="">All</option>
                 <option value="Monetary">Monetary</option>

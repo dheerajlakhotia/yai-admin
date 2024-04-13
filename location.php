@@ -5,6 +5,15 @@
 <?php require 'includes/sidebar.php' ?>
 
 <main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Location</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                <li class="breadcrumb-item active">Location</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
     <!-- F.A.Q Group 2 and General Form Elements -->
     <div class="container-fluid">
         <!-- Use container-fluid for full width -->
@@ -24,20 +33,22 @@
                         <input type="text" class="form-control">
                     </div>
                     <div class="mb-3">
-                        <label for="inputText" class="form-label">HOD Name: </label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label for="inputText" class="form-label">HOD Contact: </label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="mb-3">
                         <label for="inputText" class="form-label">Total childrens: </label>
                         <input type="text" class="form-control">
                     </div>
                     <div class="mb-3">
                         <label for="inputText" class="form-label">Total volunteers: </label>
                         <input type="text" class="form-control">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="city" class="form-label">City: </label>
+                            <input type="text" class="form-control" id="city" name="city">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="state" class="form-label">State: </label>
+                            <input type="text" class="form-control" id="state" name="state">
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="locationImage" class="form-label">Location Image: </label>
@@ -59,19 +70,13 @@
     </div><!-- End container-fluid -->
     <div class="card-body">
         <h5 class="card-title">Default Table</h5>
-
+        <span>Total Location: 4</span>
         <!-- Default Table -->
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col">S.no</th>
                     <th scope="col">Location</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">HOD Name</th>
-                    <th scope="col">HOD Contact</th>
-                    <th scope="col">Total Childern</th>
-                    <th scope="col">Total Volenteer</th>
-                    <th scope="col">Image</th>
                     <th scope="col">Opration</th>
                 </tr>
             </thead>
@@ -79,63 +84,13 @@
                 <tr>
                     <th scope="row">1</th>
                     <td>mdv colony</td>
-                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi accusantium dignissimos
-                        dolorem veniam autem eos enim natus quis tempore molestias!</td>
-                    <td>Brandon </td>
-                    <td>7894561233</td>
-                    <td>25</td>
-                    <td>5</td>
-                    <td>image</td>
                     <td>
-                        <button type="submit" class="btn btn-primary">Edit</button>
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <span class="bi bi-pencil-square text-primary" title="Edit"></span>
+                        <span class="bi bi-trash text-danger" title="Delete"></span>
+
                     </td>
                 </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>mdv colony</td>
-                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi accusantium dignissimos
-                        dolorem veniam autem eos enim natus quis tempore molestias!</td>
-                    <td>Brandon </td>
-                    <td>7894561233</td>
-                    <td>25</td>
-                    <td>5</td>
-                    <td>image</td>
-                    <td>
-                        <button type="submit" class="btn btn-primary">Edit</button>
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>mdv colony</td>
-                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi accusantium dignissimos
-                        dolorem veniam autem eos enim natus quis tempore molestias!</td>
-                    <td>Brandon </td>
-                    <td>7894561233</td>
-                    <td>25</td>
-                    <td>5</td>
-                    <td>image</td>
-                    <td>
-                        <button type="submit" class="btn btn-primary">Edit</button>
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>mdv colony</td>
-                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi accusantium dignissimos
-                        dolorem veniam autem eos enim natus quis tempore molestias!</td>
-                    <td>Brandon </td>
-                    <td>7894561233</td>
-                    <td>25</td>
-                    <td>5</td>
-                    <td>image</td>
-                    <td>
-                        <button type="submit" class="btn btn-primary">Edit</button>
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </td>
-                </tr>
+
             </tbody>
         </table>
         <!-- End Default Table Example -->

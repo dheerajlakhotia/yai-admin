@@ -22,7 +22,14 @@
                 <label for="content" class="form-label">Content:</label>
                 <textarea class="form-control" id="content" name="content" rows="6" required></textarea>
             </div>
-
+            <div class="mb-3">
+                <label for="featureImage" class="form-label">Feature Image:</label>
+                <input type="file" class="form-control" id="featureImage" name="featureImage" accept="image/*" required>
+            </div>
+            <div class="mb-3">
+                <label for="additionalImage" class="form-label">Additional Image:</label>
+                <input type="file" class="form-control" id="additionalImage" name="additionalImage" accept="image/*">
+            </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>

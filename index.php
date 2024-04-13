@@ -33,7 +33,6 @@
                             <div class="card-body">
                                 <h5 class="card-title">Neeraj</h5>
                                 <p class="card-text">Total Drives: 7</p>
-                                <p class="card-text">Location: Mp colony</p>
                             </div>
                         </div>
                     </div>
@@ -46,7 +45,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Dheeraj</h5>
                                 <p class="card-text">Total Drives: 15</p>
-                                <p class="card-text">Location: Pawan puri</p>
+
                             </div>
                         </div>
                     </div>
@@ -58,7 +57,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Yash</h5>
                                 <p class="card-text">Total Drives: 10</p>
-                                <p class="card-text">Location: Jailroad</p>
+
                             </div>
                         </div>
                     </div>
@@ -70,7 +69,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Suraj</h5>
                                 <p class="card-text">Total Drives: 20</p>
-                                <p class="card-text">Location: Sagar</p>
+
                             </div>
                         </div>
                     </div>
@@ -166,127 +165,20 @@
 
             </div><!-- End Customers Card -->
 
+
+
+
+
             <!-- volenteer approval -->
 
             <div class="container mt-5">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h2>Volenteer Requests</h2>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h2 class="card-title">Volenteer Requests</h2>
 
-                        <table class="table table-bordered mt-4 text-center">
-                            <thead>
-                                <tr>
-                                    <th scope="col">S.No.</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Sample data; replace with dynamic data from your backend -->
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>John Doe</td>
-                                    <td>
-                                        <a href="#" onclick="approveRequest(1)" class="me-2">
-                                            <i class="bi bi-check"></i><!-- Use Bootstrap Icons for approval -->
-                                        </a>
-                                        <a href="#" onclick="rejectRequest(1)" class="me-2">
-                                            <i class="bi bi-trash"></i> <!-- Use Bootstrap Icons for rejection -->
-                                        </a>
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                            data-bs-target="#volenteerModal">
-                                            See Detail <i class="bi bi-primery"></i>
-                                        </button>
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jane Doe</td>
-
-                                    <td>
-                                        <a href="#" onclick="approveRequest(1)" class="me-2">
-                                            <i class="bi bi-check"></i><!-- Use Bootstrap Icons for approval -->
-                                        </a>
-                                        <a href="#" onclick="rejectRequest(1)" class="me-2">
-                                            <i class="bi bi-trash"></i> <!-- Use Bootstrap Icons for rejection -->
-                                        </a>
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                            data-bs-target="#volenteerModal">
-                                            See Detail <i class="bi bi-primery"></i>
-                                        </button>
-
-
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                    </div>
-                    <div class="col-md-5">
-                        <!-- Donation approval -->
-                        <div class="container">
-                            <h2>Donation Requests</h2>
-
-                            <table class="table table-bordered mt-4 text-center">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">S.No.</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Sample data; replace with dynamic data from your backend -->
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>John Doe</td>
-                                        <td>
-                                            <a href="#" onclick="approveRequest(1)" class="me-2">
-                                                <i class="bi bi-check"></i><!-- Use Bootstrap Icons for approval -->
-                                            </a>
-                                            <a href="#" onclick="rejectRequest(1)" class="me-2">
-                                                <i class="bi bi-trash"></i> <!-- Use Bootstrap Icons for rejection -->
-                                            </a>
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#donationModal">
-                                                See Detail <i class="bi bi-primery"></i>
-                                            </button>
-
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jane Doe</td>
-
-                                        <td>
-                                            <a href="#" onclick="approveRequest(1)" class="me-2">
-                                                <i class="bi bi-check"></i><!-- Use Bootstrap Icons for approval -->
-                                            </a>
-                                            <a href="#" onclick="rejectRequest(1)" class="me-2">
-                                                <i class="bi bi-trash"></i> <!-- Use Bootstrap Icons for rejection -->
-                                            </a>
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#donationModal">
-                                                See Detail <i class="bi bi-primery"></i>
-                                            </button>
-
-
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                        </div>
-                    </div>
-                    <div class="row mt-5">
-                        <div class="col-md-6">
-                            <!-- COntact Message -->
-
-                            <div class="container mt-5">
-                                <h2>Contact</h2>
-
-                                <table class="table table-bordered mt-4">
+                                <table class="table table-bordered mt-4 text-center">
                                     <thead>
                                         <tr>
                                             <th scope="col">S.No.</th>
@@ -300,10 +192,18 @@
                                             <th scope="row">1</th>
                                             <td>John Doe</td>
                                             <td>
+                                                <a href="#" onclick="approveRequest(1)" class="me-2">
+                                                    <i class="bi bi-check"></i><!-- Use Bootstrap Icons for approval -->
+                                                </a>
+                                                <a href="#" onclick="rejectRequest(1)" class="me-2">
+                                                    <i class="bi bi-trash"></i>
+                                                    <!-- Use Bootstrap Icons for rejection -->
+                                                </a>
                                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                    data-bs-target="#ContactModal">
-                                                    See Massage <i class="bi bi-primery"></i>
+                                                    data-bs-target="#volenteerModal">
+                                                    See Detail <i class="bi bi-primery"></i>
                                                 </button>
+
                                             </td>
                                         </tr>
                                         <tr>
@@ -311,10 +211,18 @@
                                             <td>Jane Doe</td>
 
                                             <td>
+                                                <a href="#" onclick="approveRequest(1)" class="me-2">
+                                                    <i class="bi bi-check"></i><!-- Use Bootstrap Icons for approval -->
+                                                </a>
+                                                <a href="#" onclick="rejectRequest(1)" class="me-2">
+                                                    <i class="bi bi-trash"></i>
+                                                    <!-- Use Bootstrap Icons for rejection -->
+                                                </a>
                                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                    data-bs-target="#ContactModal">
-                                                    See Massage <i class="bi bi-primery"></i>
+                                                    data-bs-target="#volenteerModal">
+                                                    See Detail <i class="bi bi-primery"></i>
                                                 </button>
+
 
                                             </td>
                                         </tr>
@@ -322,6 +230,112 @@
                                 </table>
 
                             </div>
+                            <div class="col-md-5">
+                                <!-- Donation approval -->
+                                <div class="container">
+                                    <h2 class="card-title">Donation Requests</h2>
+
+                                    <table class="table table-bordered mt-4 text-center">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">S.No.</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Sample data; replace with dynamic data from your backend -->
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>John Doe</td>
+                                                <td>
+                                                    <a href="#" onclick="approveRequest(1)" class="me-2">
+                                                        <i class="bi bi-check"></i>
+                                                        <!-- Use Bootstrap Icons for approval -->
+                                                    </a>
+                                                    <a href="#" onclick="rejectRequest(1)" class="me-2">
+                                                        <i class="bi bi-trash"></i>
+                                                        <!-- Use Bootstrap Icons for rejection -->
+                                                    </a>
+                                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                        data-bs-target="#donationModal">
+                                                        See Detail <i class="bi bi-primery"></i>
+                                                    </button>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <td>Jane Doe</td>
+
+                                                <td>
+                                                    <a href="#" onclick="approveRequest(1)" class="me-2">
+                                                        <i class="bi bi-check"></i>
+                                                        <!-- Use Bootstrap Icons for approval -->
+                                                    </a>
+                                                    <a href="#" onclick="rejectRequest(1)" class="me-2">
+                                                        <i class="bi bi-trash"></i>
+                                                        <!-- Use Bootstrap Icons for rejection -->
+                                                    </a>
+                                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                        data-bs-target="#donationModal">
+                                                        See Detail <i class="bi bi-primery"></i>
+                                                    </button>
+
+
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                            <div class="row mt-5">
+                                <div class="col-md-6">
+                                    <!-- COntact Message -->
+
+                                    <div class="container mt-5">
+                                        <h2 class="card-title">Contact</h2>
+
+                                        <table class="table table-bordered mt-4">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">S.No.</th>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Sample data; replace with dynamic data from your backend -->
+                                                <tr>
+                                                    <th scope="row">1</th>
+                                                    <td>John Doe</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary"
+                                                            data-bs-toggle="modal" data-bs-target="#ContactModal">
+                                                            See Massage <i class="bi bi-primery"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">2</th>
+                                                    <td>Jane Doe</td>
+
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary"
+                                                            data-bs-toggle="modal" data-bs-target="#ContactModal">
+                                                            See Massage <i class="bi bi-primery"></i>
+                                                        </button>
+
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
@@ -480,121 +494,137 @@
             </div>
             <div class="container">
 
-                <h5 class="card-title">Today Drive</h5>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="list-group" id="list-tab" role="tablist">
-                            <a class="list-group-item list-group-item-action active" id="list-home-list"
-                                data-bs-toggle="list" href="#list-home" role="tab" aria-controls="list-home">SAGAR
-                                ROAD</a>
-                            <a class="list-group-item list-group-item-action" id="list-profile-list"
-                                data-bs-toggle="list" href="#list-profile" role="tab"
-                                aria-controls="list-profile">PAWANPURI</a>
-                            <a class="list-group-item list-group-item-action" id="list-messages-list"
-                                data-bs-toggle="list" href="#list-messages" role="tab"
-                                aria-controls="list-messages">JAILROAD</a>
-                            <a class="list-group-item list-group-item-action" id="list-settings-list"
-                                data-bs-toggle="list" href="#list-settings" role="tab" aria-controls="list-settings">MP
-                                COLONY</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="tab-content" id="nav-tabContent">
-                            <!-- first location  -->
-                            <div class="tab-pane fade show active" id="list-home" role="tabpanel"
-                                aria-labelledby="list-home-list">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">User</th>
-                                            <th scope="col">Description</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Yash</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet,
-                                                perferendis.</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Pawan</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet,
-                                                perferendis Lorem ipsum dolor sit amet.</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- secound location  -->
-                            <div class="tab-pane fade" id="list-profile" role="tabpanel"
-                                aria-labelledby="list-profile-list">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">User</th>
-                                            <th scope="col">Description</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Dheeraj</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet,
-                                                perferendis Lorem ipsum dolor sit amet.</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- third location  -->
-                            <div class="tab-pane fade" id="list-messages" role="tabpanel"
-                                aria-labelledby="list-messages-list">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">User</th>
-                                            <th scope="col">Description</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Neeraj</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet,
-                                                perferendis.</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Suraj</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet,
-                                                perferendis.</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Seema</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet,
-                                                perferendis.</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- fourth location -->
-                            <div class="tab-pane fade" id="list-settings" role="tabpanel"
-                                aria-labelledby="list-settings-list">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">User</th>
-                                            <th scope="col">Description</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Ashish</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet,
-                                                perferendis.</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                <div class="card">
+                    <div class="card-body">
+
+
+                        <h5 class="card-title">Today Drive</h5>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="list-group" id="list-tab" role="tablist">
+                                    <a class="list-group-item list-group-item-action active" id="list-home-list"
+                                        data-bs-toggle="list" href="#list-home" role="tab"
+                                        aria-controls="list-home">SAGAR
+                                        ROAD</a>
+                                    <a class="list-group-item list-group-item-action" id="list-profile-list"
+                                        data-bs-toggle="list" href="#list-profile" role="tab"
+                                        aria-controls="list-profile">PAWANPURI</a>
+                                    <a class="list-group-item list-group-item-action" id="list-messages-list"
+                                        data-bs-toggle="list" href="#list-messages" role="tab"
+                                        aria-controls="list-messages">JAILROAD</a>
+                                    <a class="list-group-item list-group-item-action" id="list-settings-list"
+                                        data-bs-toggle="list" href="#list-settings" role="tab"
+                                        aria-controls="list-settings">MP
+                                        COLONY</a>
+                                </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="tab-content" id="nav-tabContent">
+                                    <!-- first location  -->
+                                    <div class="tab-pane fade show active" id="list-home" role="tabpanel"
+                                        aria-labelledby="list-home-list">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">User</th>
+                                                    <th scope="col">Description</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Yash</td>
+                                                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                                        Eveniet,
+                                                        perferendis.</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Pawan</td>
+                                                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                                        Eveniet,
+                                                        perferendis Lorem ipsum dolor sit amet.</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- secound location  -->
+                                    <div class="tab-pane fade" id="list-profile" role="tabpanel"
+                                        aria-labelledby="list-profile-list">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">User</th>
+                                                    <th scope="col">Description</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Dheeraj</td>
+                                                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                                        Eveniet,
+                                                        perferendis Lorem ipsum dolor sit amet.</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- third location  -->
+                                    <div class="tab-pane fade" id="list-messages" role="tabpanel"
+                                        aria-labelledby="list-messages-list">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">User</th>
+                                                    <th scope="col">Description</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Neeraj</td>
+                                                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                                        Eveniet,
+                                                        perferendis.</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Suraj</td>
+                                                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                                        Eveniet,
+                                                        perferendis.</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Seema</td>
+                                                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                                        Eveniet,
+                                                        perferendis.</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- fourth location -->
+                                    <div class="tab-pane fade" id="list-settings" role="tabpanel"
+                                        aria-labelledby="list-settings-list">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">User</th>
+                                                    <th scope="col">Description</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Ashish</td>
+                                                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                                        Eveniet,
+                                                        perferendis.</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             </div>
 

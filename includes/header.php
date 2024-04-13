@@ -1,4 +1,28 @@
 <?php
+
+
+// Start the session
+session_start();
+
+// Set a cookie named "username" with the value "John" that expires in 30 days
+setcookie("username", "John", time() + (30 * 24 * 60 * 60), "/");
+
+// Set a cookie named "language" with the value "en" that expires when the browser is closed
+setcookie("language", "en", 0, "/");
+
+
+// Check if the user is not logged in, redirect to login page
+if (!isset($_SESSION["user_id"])) {
+    header("Location: ../front/login.php"); // Redirect to front-end login page
+    exit();
+}
+?>
+
+
+
+
+
+<?php
 $active_page = basename($_SERVER['PHP_SELF'], ".php");
 
 // Define an array to map page names to their corresponding titles
@@ -8,6 +32,7 @@ $page_titles = array(
     'about' => 'About',
     'activity' => 'Activity',
     'volenteer' => 'Volunteer',
+    'certificate' => 'Certificate',
     'internship' => 'Internship',
     'donation' => 'Donation',
     'blog' => 'Blog',
@@ -17,6 +42,7 @@ $page_titles = array(
     'contact' => 'Contact',
     'faq' => 'F.A.Q',
     'suggetion' => 'Suggetion',
+    'settings' => 'Settings',
     'logout' => 'Logout'
 );
 

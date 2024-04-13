@@ -42,6 +42,13 @@
                 <span>Volenteer</span>
             </a>
         </li><!-- End volenteer Page Nav -->
+        <li class="nav-item">
+            <a class="nav-link <?php if($active_page == 'certificate') echo 'active'; ?> collapsed"
+                href="certificate.php">
+                <i class="bi bi-award"></i>
+                <span>certificate</span>
+            </a>
+        </li><!-- End volenteer Page Nav -->
 
         <li class="nav-item">
             <a class="nav-link <?php if($active_page == 'donation') echo 'active'; ?> collapsed" href="donation.php">
@@ -91,7 +98,12 @@
                 <span>F.A.Q</span>
             </a>
         </li><!-- End F.A.Q Page Nav -->
-
+        <li class="nav-item">
+            <a class="nav-link <?php if($active_page == 'settings') echo 'active'; ?> collapsed" href="settings.php">
+                <i class="bi bi-gear"></i>
+                <span>Settings</span>
+            </a>
+        </li><!-- End setting Page Nav -->
         <li class="nav-item">
             <a class="nav-link <?php if($active_page == 'suggation') echo 'active'; ?> collapsed" href="suggetion.php">
                 <i class="bi bi-lightbulb-fill"></i>
