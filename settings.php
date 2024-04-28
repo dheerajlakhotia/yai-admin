@@ -4,6 +4,97 @@
 
 <?php require 'includes/sidebar.php' ?>
 
+
+
+
+<?php
+
+
+
+// Check if form is submitted and use POST method (avoid hardcoding)
+if ($_SERVER["REQUEST_METHOD"] === 'POST') {
+  // Escape user input to prevent SQL injection (security best practice)
+  $metaDescription = mysqli_real_escape_string($conn, $_POST['metaDescription']);
+  $metaTags = mysqli_real_escape_string($conn, $_POST['metaTags']);
+  $contactNumber = mysqli_real_escape_string($conn, $_POST['contactNumber']);
+  $contactEmail = mysqli_real_escape_string($conn, $_POST['contactEmail']);
+  $address = mysqli_real_escape_string($conn, $_POST['Address']);
+  $facebook = mysqli_real_escape_string($conn, $_POST['socialMediaFacebook']);
+  $twitter = mysqli_real_escape_string($conn, $_POST['socialMediaTwitter']);
+  $instagram = mysqli_real_escape_string($conn, $_POST['socialMediaInstagram']);
+  $youtube = mysqli_real_escape_string($conn, $_POST['socialMediaYoutube']);
+
+  // Handle file uploads with error checking
+  $logoUpload = $_FILES['logoUpload'];
+  $faviconUpload = $_FILES['faviconUpload'];
+
+  $logoFilename = "";
+  $faviconFilename = "";
+
+  if ($logoUpload['error'] === UPLOAD_ERR_OK) {
+    $logoFilename = $logoUpload['name'];
+    $logoDestination = "../uploads/" . $logoFilename;
+    move_uploaded_file($logoUpload['tmp_name'], $logoDestination);
+  }
+
+  if ($faviconUpload['error'] === UPLOAD_ERR_OK) {
+    $faviconFilename = $faviconUpload['name'];
+    $faviconDestination = "../uploads/" . $faviconFilename;
+    move_uploaded_file($faviconUpload['tmp_name'], $faviconDestination);
+  }
+
+  // Check if data exists (same logic as before)
+  $checkQuery = "SELECT * FROM general_details";
+  $result = mysqli_query($conn, $checkQuery);
+
+  if (mysqli_num_rows($result) > 0) {
+    // Update data
+    $sql = "UPDATE general_details 
+              SET meta_description = '$metaDescription', 
+                  meta_tags = '$metaTags', 
+                  contact_number = '$contactNumber', 
+                  contact_email = '$contactEmail', 
+                  address = '$address', 
+                  facebook = '$facebook', 
+                  twitter = '$twitter', 
+                  instagram = '$instagram', 
+                  youtube = '$youtube', 
+                  logo_filename = '$logoFilename', 
+                  favicon_filename = '$faviconFilename'
+              WHERE 1";  // Assuming you have a unique identifier for update
+
+    if (mysqli_query($conn, $sql)) {
+      echo "Data updated successfully!";
+    } else {
+      echo "Error updating data: " . mysqli_error($conn);
+    }
+  } else {
+    // Insert data (same logic as before)
+    $sql = "INSERT INTO general_details 
+              (meta_description, meta_tags, contact_number, contact_email, address, facebook, twitter, instagram, youtube, logo_filename, favicon_filename) 
+              VALUES 
+              ('$metaDescription', '$metaTags', '$contactNumber', '$contactEmail', '$address', '$facebook', '$twitter', '$instagram', '$youtube', '$logoFilename', '$faviconFilename')";
+
+    if (mysqli_query($conn, $sql)) {
+      echo "Data inserted successfully!";
+    } else {
+      echo "Error inserting data: " . mysqli_error($conn);
+    }
+  }
+}
+
+
+
+?>
+
+
+
+
+
+
+
+
+
 <main id="main" class="main">
     <div class="pagetitle">
         <h1>Settings</h1>
@@ -19,170 +110,73 @@
         <div class="card">
             <div class="card-body mt-4">
                 <h2 class="card-title">General Settings</h2>
-                <form>
+                <form enctype="multipart/form-data" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                     <div class="form-group">
                         <label for="metaDescription">Meta Description</label>
-                        <textarea class="form-control" id="metaDescription" rows="3"
-                            placeholder="use 150 words only"></textarea>
+                        <textarea class="form-control" id="metaDescription" name="metaDescription" rows="3"
+                            placeholder="use 150 words only"><?php echo isset($metaDescription) ? $metaDescription : ''; ?></textarea>
                     </div>
                     <div class="form-group">
                         <label for="metaTags">Meta Tags</label>
-                        <input type="text" class="form-control" id="metaTags" placeholder="Enter meta tags">
+                        <input type="text" class="form-control" id="metaTags" name="metaTags"
+                            placeholder="Enter meta tags" value="<?php echo isset($metaTags) ? $metaTags : ''; ?>">
                     </div>
                     <div class="form-group">
                         <label for="contactNumber">Contact Number</label>
-                        <input type="text" class="form-control" id="contactNumber" placeholder="Enter contact number">
+                        <input type="text" class="form-control" id="contactNumber" name="contactNumber"
+                            placeholder="Enter contact number"
+                            value="<?php echo isset($contactNumber) ? $contactNumber : ''; ?>">
                     </div>
                     <div class="form-group">
                         <label for="contactEmail">Contact Email</label>
-                        <input type="email" class="form-control" id="contactEmail" placeholder="Enter contact email">
+                        <input type="email" class="form-control" id="contactEmail" name="contactEmail"
+                            placeholder="Enter contact email"
+                            value="<?php echo isset($contactEmail) ? $contactEmail : ''; ?>">
                     </div>
                     <div class="form-group">
                         <label for="Address">Address</label>
-                        <input type="text" class="form-control" id="Address" placeholder="Enter Address">
+                        <input type="text" class="form-control" id="Address" name="Address" placeholder="Enter Address"
+                            value="<?php echo isset($address) ? $address : ''; ?>">
                     </div>
                     <div class="form-group">
                         <label for="socialMediaFacebook">Facebook</label>
-                        <input type="text" class="form-control" id="socialMediaFacebook"
-                            placeholder="Enter Facebook link">
+                        <input type="text" class="form-control" id="socialMediaFacebook" name="socialMediaFacebook"
+                            placeholder="Enter Facebook link" value="<?php echo isset($facebook) ? $facebook : ''; ?>">
                     </div>
                     <div class="form-group">
                         <label for="socialMediaTwitter">Twitter</label>
-                        <input type="text" class="form-control" id="socialMediaTwitter"
-                            placeholder="Enter Twitter link">
+                        <input type="text" class="form-control" id="socialMediaTwitter" name="socialMediaTwitter"
+                            placeholder="Enter Twitter link" value="<?php echo isset($twitter) ? $twitter : ''; ?>">
                     </div>
                     <div class="form-group">
                         <label for="socialMediaInstagram">Instagram</label>
-                        <input type="text" class="form-control" id="socialMediaInstagram"
-                            placeholder="Enter Instagram link">
+                        <input type="text" class="form-control" id="socialMediaInstagram" name="socialMediaInstagram"
+                            placeholder="Enter Instagram link"
+                            value="<?php echo isset($instagram) ? $instagram : ''; ?>">
                     </div>
                     <div class="form-group">
                         <label for="socialMediaYoutube">Youtube</label>
-                        <input type="text" class="form-control" id="socialMediaYoutube"
-                            placeholder="Enter Youtube link">
+                        <input type="text" class="form-control" id="socialMediaYoutube" name="socialMediaYoutube"
+                            placeholder="Enter Youtube link" value="<?php echo isset($youtube) ? $youtube : ''; ?>">
                     </div>
                     <div class="form-group my-4">
                         <label for="logoUpload">Logo Upload</label>
-                        <input type="file" class="form-control-file" id="logoUpload">
+                        <input type="file" class="form-control-file" id="logoUpload" name="logoUpload">
                     </div>
                     <div class="form-group mb-2">
                         <label for="faviconUpload">Favicon Upload</label>
-                        <input type="file" class="form-control-file" id="faviconUpload">
+                        <input type="file" class="form-control-file" id="faviconUpload" name="faviconUpload">
                     </div>
                     <button type="submit" class="btn btn-primary">Save Changes</button>
                 </form>
 
-            </div>
-        </div>
-    </div>
 
-    <div class="container mt-4">
-        <div class="card">
-            <div class="card-body mt-4">
-                <h2 class="card-title">User and Permission Settings</h2>
-                <form>
-                    <div class="form-group">
-                        <label for="userRole">Select User Role</label>
-                        <select class="form-control" id="userRole">
-                            <option>Founding Member</option>
-                            <option>HOD</option>
-                            <option>Volunteer</option>
-                            <option>Intern</option>
-                            <!-- Add more user roles if needed -->
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Permissions for Pages</label>
-                        <div class="row">
-
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="page1">
-                                    <label class="form-check-label" for="page1">Profile</label>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="page2">
-                                    <label class="form-check-label" for="page2">About</label>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="page3">
-                                    <label class="form-check-label" for="page3">Activity</label>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="page4">
-                                    <label class="form-check-label" for="page4">Volenteer</label>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="page5">
-                                    <label class="form-check-label" for="page5">Donation</label>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="page6">
-                                    <label class="form-check-label" for="page6">Blog</label>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="page7">
-                                    <label class="form-check-label" for="page7">Gallery</label>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="page8">
-                                    <label class="form-check-label" for="page8">Event</label>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="page9">
-                                    <label class="form-check-label" for="page9">Location</label>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="page10">
-                                    <label class="form-check-label" for="page10">Contact</label>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="page11">
-                                    <label class="form-check-label" for="page11">FAQ</label>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="page12">
-                                    <label class="form-check-label" for="page12">Settings</label>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="page13">
-                                    <label class="form-check-label" for="page13">Suggetion</label>
-                                </div>
-                            </div>
-
-                        </div>
-                        <!-- Add more pages with checkboxes as needed -->
-                    </div>
-                    <button type="submit" class="btn btn-primary my-3">Save Permissions</button>
-                </form>
 
             </div>
         </div>
     </div>
+
+
     <div class="container mt-4">
         <div class="card">
             <div class="card-body">

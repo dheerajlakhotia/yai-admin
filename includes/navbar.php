@@ -1,3 +1,44 @@
+<?php
+require 'includes/dbconfig.php';
+
+// Fetch user's details including name, role, and image path
+$userId = $_SESSION["user_id"]; // Assuming you have stored user ID in the session
+
+$sql = "SELECT name, role_id, image FROM yai_users WHERE id='$userId'";
+$result = $conn->query($sql);
+
+$userName = '';
+$userRole = '';
+$userImagePath = '';
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $userName = $row["name"];
+
+    // Determine user's role
+    switch ($row["role_id"]) {
+        case 1:
+            $userRole = 'Founding Member';
+            break;
+        case 2:
+            $userRole = 'HOD';
+            break;
+        case 3:
+            $userRole = 'Volunteer';
+            break;
+        case 4:
+            $userRole = 'Intern';
+            break;
+            case 5:
+            $userRole = 'Counsling Member';
+            break;
+        default:
+            $userRole = 'Unknown';
+    }
+
+   
+}
+?>
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -18,14 +59,16 @@
             <li class="nav-item dropdown pe-3">
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-                    <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+
+                    <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $userName; ?></span>
+
+
                 </a><!-- End Profile Iamge Icon -->
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
-                        <h6>Kevin Anderson</h6>
-                        <span>Web Designer</span>
+                        <h6><?php echo $userName; ?></h6>
+                        <span><?php echo $userRole; ?></span>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
@@ -56,7 +99,7 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
+                        <a class="dropdown-item d-flex align-items-center" href="logout.php">
                             <i class="bi bi-box-arrow-right"></i>
                             <span>Sign Out</span>
                         </a>

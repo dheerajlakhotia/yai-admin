@@ -1,8 +1,16 @@
 <?php
 
+// Check if session is not active
+if (session_status() === PHP_SESSION_NONE) {
+    // Start the session
+    session_start();
+}
 
-// Start the session
-session_start();
+// Check if the user is not logged in, redirect to login page
+if (!isset($_SESSION["user_id"])) {
+    header("Location: ../front/login.php"); // Redirect to front-end login page
+    exit();
+}
 
 // Set a cookie named "username" with the value "John" that expires in 30 days
 setcookie("username", "John", time() + (30 * 24 * 60 * 60), "/");
@@ -10,17 +18,13 @@ setcookie("username", "John", time() + (30 * 24 * 60 * 60), "/");
 // Set a cookie named "language" with the value "en" that expires when the browser is closed
 setcookie("language", "en", 0, "/");
 
+// Fetch and set the role_id in the session after the user logs in
+// Example: 
+// Assuming you have fetched $user_role from the database after login
+// and it contains the role ID of the user
+$_SESSION['role_id'] = $user_role;
 
-// Check if the user is not logged in, redirect to login page
-if (!isset($_SESSION["user_id"])) {
-    header("Location: ../front/login.php"); // Redirect to front-end login page
-    exit();
-}
 ?>
-
-
-
-
 
 <?php
 $active_page = basename($_SERVER['PHP_SELF'], ".php");

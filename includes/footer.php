@@ -236,6 +236,20 @@ document.getElementById("image").addEventListener("change", function(event) {
 });
 </script>
 
+<script>
+function showDetails(id) {
+    var detailsRow = document.getElementById('details_' + id);
+    if (detailsRow.style.display === 'none') {
+        detailsRow.style.display = 'table-row';
+    } else {
+        detailsRow.style.display = 'none';
+    }
+}
+</script>
+
+
+
+
 </body>
 
 </html>

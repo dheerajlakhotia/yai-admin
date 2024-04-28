@@ -164,282 +164,6 @@
                 </div>
 
             </div><!-- End Customers Card -->
-
-
-
-
-
-            <!-- volenteer approval -->
-
-            <div class="container mt-5">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h2 class="card-title">Volenteer Requests</h2>
-
-                                <table class="table table-bordered mt-4 text-center">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">S.No.</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <!-- Sample data; replace with dynamic data from your backend -->
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>John Doe</td>
-                                            <td>
-                                                <a href="#" onclick="approveRequest(1)" class="me-2">
-                                                    <i class="bi bi-check"></i><!-- Use Bootstrap Icons for approval -->
-                                                </a>
-                                                <a href="#" onclick="rejectRequest(1)" class="me-2">
-                                                    <i class="bi bi-trash"></i>
-                                                    <!-- Use Bootstrap Icons for rejection -->
-                                                </a>
-                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                    data-bs-target="#volenteerModal">
-                                                    See Detail <i class="bi bi-primery"></i>
-                                                </button>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jane Doe</td>
-
-                                            <td>
-                                                <a href="#" onclick="approveRequest(1)" class="me-2">
-                                                    <i class="bi bi-check"></i><!-- Use Bootstrap Icons for approval -->
-                                                </a>
-                                                <a href="#" onclick="rejectRequest(1)" class="me-2">
-                                                    <i class="bi bi-trash"></i>
-                                                    <!-- Use Bootstrap Icons for rejection -->
-                                                </a>
-                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                    data-bs-target="#volenteerModal">
-                                                    See Detail <i class="bi bi-primery"></i>
-                                                </button>
-
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-                            </div>
-                            <div class="col-md-5">
-                                <!-- Donation approval -->
-                                <div class="container">
-                                    <h2 class="card-title">Donation Requests</h2>
-
-                                    <table class="table table-bordered mt-4 text-center">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">S.No.</th>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <!-- Sample data; replace with dynamic data from your backend -->
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>John Doe</td>
-                                                <td>
-                                                    <a href="#" onclick="approveRequest(1)" class="me-2">
-                                                        <i class="bi bi-check"></i>
-                                                        <!-- Use Bootstrap Icons for approval -->
-                                                    </a>
-                                                    <a href="#" onclick="rejectRequest(1)" class="me-2">
-                                                        <i class="bi bi-trash"></i>
-                                                        <!-- Use Bootstrap Icons for rejection -->
-                                                    </a>
-                                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                        data-bs-target="#donationModal">
-                                                        See Detail <i class="bi bi-primery"></i>
-                                                    </button>
-
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Jane Doe</td>
-
-                                                <td>
-                                                    <a href="#" onclick="approveRequest(1)" class="me-2">
-                                                        <i class="bi bi-check"></i>
-                                                        <!-- Use Bootstrap Icons for approval -->
-                                                    </a>
-                                                    <a href="#" onclick="rejectRequest(1)" class="me-2">
-                                                        <i class="bi bi-trash"></i>
-                                                        <!-- Use Bootstrap Icons for rejection -->
-                                                    </a>
-                                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                        data-bs-target="#donationModal">
-                                                        See Detail <i class="bi bi-primery"></i>
-                                                    </button>
-
-
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-
-                                </div>
-                            </div>
-                            <div class="row mt-5">
-                                <div class="col-md-6">
-                                    <!-- COntact Message -->
-
-                                    <div class="container mt-5">
-                                        <h2 class="card-title">Contact</h2>
-
-                                        <table class="table table-bordered mt-4">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">S.No.</th>
-                                                    <th scope="col">Name</th>
-                                                    <th scope="col">Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <!-- Sample data; replace with dynamic data from your backend -->
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>John Doe</td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-primary"
-                                                            data-bs-toggle="modal" data-bs-target="#ContactModal">
-                                                            See Massage <i class="bi bi-primery"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">2</th>
-                                                    <td>Jane Doe</td>
-
-                                                    <td>
-                                                        <button type="button" class="btn btn-primary"
-                                                            data-bs-toggle="modal" data-bs-target="#ContactModal">
-                                                            See Massage <i class="bi bi-primery"></i>
-                                                        </button>
-
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- volenteer Modal -->
-            <div class="modal fade" id="volenteerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Donation Details</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div>
-                                <img id="zoomImage" src="assets/img/news-1.jpg" alt=""
-                                    style="max-width: 275px; max-height: 275px; ">
-                            </div>
-                            <p><strong>Name:</strong> John Doe</p>
-                            <p><strong>Email:</strong> john@example.com</p>
-                            <p><strong>Gender:</strong> Male</p>
-                            <p><strong>Address:</strong> xyz</p>
-                            <p><strong>Phone:</strong> 7894561237</p>
-                            <p><strong>Date Of Birth:</strong> 11-08-2001</p>
-                            <p><strong>Occupation:</strong> Student</p>
-                            <p><strong>ID Proof:</strong> Aadhar</p>
-                            <div>
-                                <img id="zoomImage" src="assets/img/card.jpg" alt=""
-                                    style="max-width: 275px; max-height: 275px; ">
-                            </div>
-
-                            <p><strong>Hobbies:</strong> Football</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <!-- donation Modal -->
-            <div class="modal fade" id="donationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Donation Details</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p><strong>Donation Type:</strong> Food</p>
-                            <p><strong>Name:</strong> John Doe</p>
-                            <p><strong>Email:</strong> john@example.com</p>
-                            <p><strong>Address:</strong> xyz</p>
-                            <p><strong>Phone:</strong> 7894561237</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-
-            <!--contact Modal -->
-            <div class="modal fade" id="ContactModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Massage</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p><strong>Subject:</strong> Lorem ipsum dolor sit amet consectetur adipisicing
-                                elit. Velit, unde.</p>
-                            <p><strong>Massage:</strong> Lorem ipsum dolor sit amet consectetur adipisicing
-                                elit.
-                                Necessitatibus, magnam deleniti. Nam iure dignissimos ea culpa inventore eos
-                                perspiciatis aperiam aut iste quidem nulla illum deleniti, ratione quisquam,
-                                similique at dicta obcaecati, suscipit fuga praesentium architecto libero? Quas
-                                tempora nulla architecto voluptatibus veniam earum, porro molestias amet
-                                delectus maxime explicabo.</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-
-
-
-
-
             <!-- News & Updates Traffic -->
             <div class="col-lg">
                 <div class="card">
@@ -629,7 +353,321 @@
             </div>
 
 
+            <!-- only founding member can see this part  -->
+            <?php
+          // Fetch the user's role from the database
+$user_id = $_SESSION["user_id"];
+$sql = "SELECT role_id FROM yai_users WHERE id = $user_id";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $user_role = $row["role_id"];
+} else {
+    // Handle error if user role cannot be retrieved
+    // You can redirect the user to an error page or display an error message
+    echo "Error: User role not found.";
+    exit();
+}
+
+// Check if the user is a founding member (role_id = 1)
+if ($user_role == 1) {
+    // Display the section for founding members
+    ?>
+
+            <!-- volenteer req -->
+            <div class="container">
+                <h2 class="card-title">Volunteer Requests</h2>
+                <div class="table-responsive">
+                    <table class="table table-bordered mt-4 text-center">
+                        <thead>
+                            <tr>
+                                <th scope="col">S.No.</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Image</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Gender</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Date of Birth</th>
+                                <th scope="col">Occupation</th>
+                                <th scope="col">ID Proof</th>
+                                <th scope="col">ID Image</th>
+                                <th scope="col">Hobbies</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+    // Include database connection file
+    include 'includes/dbconfig.php';
+
+    // Function to approve or delete a user
+    function approveOrDeleteUser($conn, $user_id, $action) {
+        if ($action === 'approve') {
+            $sql = "UPDATE yai_users SET status = 1 WHERE id = $user_id ";
+        } elseif ($action === 'delete') {
+            $sql = "DELETE FROM yai_users WHERE id = $user_id";
+        }
+        if ($conn->query($sql) === TRUE) {
+            echo "User $action successfully";
+        } else {
+            echo "Error: " . $conn->error;
+        }
+    }
+
+    // Check if form is submitted
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (isset($_POST['approve']) && isset($_POST['user_id'])) {
+            approveOrDeleteUser($conn, $_POST['user_id'], 'approve');
+        } elseif (isset($_POST['delete']) && isset($_POST['user_id'])) {
+            approveOrDeleteUser($conn, $_POST['user_id'], 'delete');
+        }
+    }
+
+    // Fetching data
+    $sql = "SELECT * FROM yai_users WHERE status = 0 AND role_id = 3";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo "<tr>";
+            echo "<td>" . $row["id"] . "</td>";
+            echo "<td>" . $row["name"] . "</td>";
+            echo "<td><img src='" . $row["image"] . "' alt='Image' class='img-fluid'></td>";
+            echo "<td>" . $row["email"] . "</td>";
+            echo "<td>" . $row["gender"] . "</td>";
+            echo "<td>" . $row["address"] . "</td>";
+            echo "<td>" . $row["mobile"] . "</td>";
+            echo "<td>" . $row["dob"] . "</td>";
+            echo "<td>" . $row["occupation"] . "</td>";
+            echo "<td>" . $row["id_type"] . "</td>";
+            echo "<td><img src='" . $row["id_image"] . "' alt='ID Image' class='img-fluid'></td>";
+            echo "<td>" . $row["hobbies"] . "</td>";
+            echo "<td>
+                    <form method='post'>
+                        <input type='hidden' name='user_id' value='" . $row["id"] . "'>
+                        <button type='submit' name='approve' class='btn btn-success me-2'>Approve</button>
+                        <button type='submit' name='delete' class='btn btn-danger'>Delete</button>
+                    </form>
+                </td>";
+            echo "</tr>";
+        }
+    } else {
+        echo "<tr><td colspan='13'>No volunteer requests found.</td></tr>";
+    }
+   
+    ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- intern req -->
+            <div class="container">
+                <h2 class="card-title">Internship Requests</h2>
+                <div class="table-responsive">
+                    <table class="table table-bordered mt-4 text-center">
+                        <thead>
+                            <tr>
+                                <th scope="col">S.No.</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Image</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Gender</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Date of Birth</th>
+                                <th scope="col">Occupation</th>
+                                <th scope="col">ID Proof</th>
+                                <th scope="col">ID Image</th>
+                                <th scope="col">Hobbies</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+    // Fetching data for internship requests with status = 0 and role ID = 4
+    $sql = "SELECT * FROM yai_users WHERE status = 0 AND role_id = 4";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo "<tr>";
+            echo "<td>" . $row["id"] . "</td>";
+            echo "<td>" . $row["name"] . "</td>";
+            echo "<td><img src='" . $row["image"] . "' alt='Image' class='img-fluid'></td>";
+            echo "<td>" . $row["email"] . "</td>";
+            echo "<td>" . $row["gender"] . "</td>";
+            echo "<td>" . $row["address"] . "</td>";
+            echo "<td>" . $row["mobile"] . "</td>";
+            echo "<td>" . $row["dob"] . "</td>";
+            echo "<td>" . $row["occupation"] . "</td>";
+            echo "<td>" . $row["id_type"] . "</td>";
+            echo "<td><img src='" . $row["id_image"] . "' alt='ID Image' class='img-fluid'></td>";
+            echo "<td>" . $row["hobbies"] . "</td>";
+            echo "<td>
+                    <form method='post'>
+                        <input type='hidden' name='user_id' value='" . $row["id"] . "'>
+                        <button type='submit' name='approve' class='btn btn-success me-2'>Approve</button>
+                        <button type='submit' name='delete' class='btn btn-danger'>Delete</button>
+                    </form>
+                </td>";
+            echo "</tr>";
+        }
+    } else {
+        echo "<tr><td colspan='13'>No internship requests found.</td></tr>";
+    }
+ 
+    ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Donation approval -->
+            <div class="container">
+                <h2 class="card-title">Donation Requests</h2>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered mt-4 text-center">
+                        <thead>
+                            <tr>
+                                <th scope="col">S.No.</th>
+                                <th scope="col">Donation Type</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+
+                    // Function to approve or delete a donation
+function approveOrDeleteDonation($conn, $donation_id, $action) {
+    if ($action === 'approve') {
+        $sql = "UPDATE donation_requests SET status = '1' WHERE id = $donation_id";
+    } elseif ($action === 'delete') {
+        $sql = "DELETE FROM donation_requests WHERE id = $donation_id";
+    }
+    if ($conn->query($sql) === TRUE) {
+        echo "Donation $action successfully";
+    } else {
+        echo "Error: " . $conn->error;
+    }
+}
+
+
+    // Check if form is submitted
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (isset($_POST['approve']) && isset($_POST['donation_id'])) {
+            approveOrDeleteDonation($conn, $_POST['donation_id'], 'approve');
+        } elseif (isset($_POST['delete']) && isset($_POST['donation_id'])) {
+            approveOrDeleteDonation($conn, $_POST['donation_id'], 'delete');
+        }
+    }
+
+    // Fetching data with status 0 (pending)
+    $sql = "SELECT * FROM donation_requests WHERE status = 0";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $count = 1;
+        while ($row = $result->fetch_assoc()) {
+            echo "<tr>";
+            echo "<td>" . $count++ . "</td>";
+            echo "<td>" . $row["donation_type"] . "</td>";
+            echo "<td>" . $row["name"] . "</td>";
+            echo "<td>" . $row["email"] . "</td>";
+            echo "<td>" . $row["address"] . "</td>";
+            echo "<td>" . $row["mobile"] . "</td>";
+            echo "<td>
+                    <form method='post'>
+                        <input type='hidden' name='donation_id' value='" . $row["id"] . "'>
+                        <button type='submit' name='approve' class='btn btn-success me-2'>Approve</button>
+                        <button type='submit' name='delete' class='btn btn-danger'>Delete</button>
+                    </form>
+                </td>";
+            echo "</tr>";
+        }
+    } else {
+        echo "<tr><td colspan='7'>No donation requests found.</td></tr>";
+    }
+     $conn->close();
+    ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+            <div class="container">
+                <h2 class="card-title">Contact Massge</h2>
+                <?php
+// Assuming you have already established a database connection and selected the appropriate database
+
+// Query to fetch data from the ContactForm table
+$sql = "SELECT * FROM contactform";
+?>
+
+                <!-- Display fetched data in HTML table with Bootstrap styling -->
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped mt-4 text-center">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">S.No.</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Subject</th>
+                                <th scope="col">Message</th>
+                                <th scope="col">Dismiss</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+    // Check if there are any rows returned by the query
+    if ($result->num_rows > 0) {
+        $count = 1;
+        // Loop through each row of data
+        while ($row = $result->fetch_assoc()) {
+            // Output data for each row in table format
+            echo "<tr>";
+            echo "<td>" . $count++ . "</td>";
+            echo "<td>" . $row["name"] . "</td>";
+            echo "<td>" . $row["email"] . "</td>";
+            echo "<td>" . $row["subject"] . "</td>";
+            echo "<td>" . $row["message"] . "</td>";
+            echo "<td><button type='button' class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#deleteModal'><i class='bi bi-x'></i></button></td>";
+            echo "</tr>";
+        }
+    } else {
+        // No rows returned by the query
+        echo "<tr><td colspan='6'>No records found</td></tr>";
+    }
+    ?>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            <!-- Founding member can see this section -->
+            <?php
+} else {
+    // Redirect the user or display a message indicating access denied
+    exit();
+}
+?>
+
+
+
+
+
+
     </section>
+
 
 </main><!-- End #main -->
 
