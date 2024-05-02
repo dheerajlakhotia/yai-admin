@@ -389,39 +389,8 @@ if ($result) {
                             </td>
                             <!-- Display image -->
 
-                            <!-- Operations (Edit and Delete) -->
 
-                            <?php
-// Check if the delete button is clicked
-if (isset($_POST['delete_user'])) {
-    // Check if user ID is provided
-    if (isset($_POST['user_id'])) {
-        // Get the user ID
-        $user_id = $_POST['user_id'];
 
-        // Prepare the delete query
-        $delete_query = "DELETE FROM yai_users WHERE id = ?";
-        
-        // Prepare the statement
-        $stmt = mysqli_prepare($conn, $delete_query);
-        
-        // Bind parameters
-        mysqli_stmt_bind_param($stmt, "i", $user_id);
-        
-        // Execute the statement
-        if (mysqli_stmt_execute($stmt)) {
-            echo "User deleted successfully.";
-        } else {
-            echo "Error deleting user: " . mysqli_error($conn);
-        }
-        
-        // Close the statement
-        mysqli_stmt_close($stmt);
-    } else {
-        echo "User ID not provided.";
-    }
-}
-?>
                             <td>
                                 <!-- Edit icon -->
                                 <!-- Edit icon -->
@@ -430,14 +399,10 @@ if (isset($_POST['delete_user'])) {
                                 </a>
 
                                 <!-- Delete icon with red color -->
-                                <!-- Add a hidden input field to store the user ID -->
-                                <input type="hidden" name="user_id" value="<?php echo $row['id']; ?>">
+                                <a href="delete_user.php?id=<?php echo $row['id']; ?>" class="btn btn-link">
+                                    <i class="bi bi-trash-fill"></i>
+                                </a>
 
-
-                                <!-- Add a submit button to trigger the delete operation -->
-                                <button type="submit" name="delete_user" class="btn btn-link">
-                                    <i class="bi bi-trash-fill" style="color: red;"></i>
-                                </button>
                             </td>
                         </tr>
                         <?php

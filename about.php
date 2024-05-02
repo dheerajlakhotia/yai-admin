@@ -1,85 +1,89 @@
-<?php require'includes/header.php'?>
-
-<?php require'includes/navbar.php'?>
-
-<?php require'includes/sidebar.php'?>
+<?php require 'includes/header.php' ?>
+<?php require 'includes/navbar.php' ?>
+<?php require 'includes/sidebar.php' ?>
 
 <?php
-// Initialize variables
-$title = '';
-$description = '';
 
-// Check if form is submitted and use POST method
-if ($_SERVER["REQUEST_METHOD"] === 'POST') {
-    // Escape user input to prevent SQL injection
-    $title = mysqli_real_escape_string($conn, $_POST['title']);
-    $description = mysqli_real_escape_string($conn, $_POST['description']);
+// Check if there is any data in the table
+$result = $conn->query("SELECT COUNT(*) as count FROM aboutus");
+$row = $result->fetch_assoc();
+$count = $row['count'];
 
-    // Handle file upload
-    $imageUpload = $_FILES['Image'];
-    $imageFilename = "";
+// Form submission handling
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $title = $_POST['title'];
+    $description = $_POST['description'];
 
-    if ($imageUpload['error'] === UPLOAD_ERR_OK) {
-        $imageFilename = $imageUpload['name'];
-        $imageDestination = "../uploads/" . $imageFilename;
-
-        // Debugging: Print out the filename and destination
-        echo "Filename: " . $imageFilename . "<br>";
-        echo "Destination: " . $imageDestination . "<br>";
-
-        // Check if the file has been successfully uploaded
-        if (move_uploaded_file($imageUpload['tmp_name'], $imageDestination)) {
-            // File successfully moved to uploads folder
-            echo "File uploaded successfully.";
-        } else {
-            // Failed to move the file
-            echo "Error: Failed to move the file to the uploads folder.";
-        }
+    // Image upload
+    $target_dir = "../uploads/"; // Folder where images will be stored
+    $target_file = $target_dir . basename($_FILES["Image"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+    
+    // Check if image file is a actual image or fake image
+    $check = getimagesize($_FILES["Image"]["tmp_name"]);
+    if($check !== false) {
+        echo "File is an image - " . $check["mime"] . ".";
+        $uploadOk = 1;
     } else {
-        // Error during file upload
-        echo "Error: " . $imageUpload['error'];
+        echo "File is not an image.";
+        $uploadOk = 0;
+    }
+    
+    // Check file size
+    if ($_FILES["Image"]["size"] > 500000) {
+        echo "Sorry, your file is too large.";
+        $uploadOk = 0;
+    }
+    
+    // Allow certain file formats
+    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+    && $imageFileType != "gif" ) {
+        echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+        $uploadOk = 0;
+    }
+    
+    // Check if $uploadOk is set to 0 by an error
+    if ($uploadOk == 0) {
+        echo "Sorry, your file was not uploaded.";
+    // if everything is ok, try to upload file
+    } else {
+        if (move_uploaded_file($_FILES["Image"]["tmp_name"], $target_file)) {
+            echo "The file ". htmlspecialchars( basename( $_FILES["Image"]["name"])). " has been uploaded.";
+        } else {
+            echo "Sorry, there was an error uploading your file.";
+        }
     }
 
-    // Check if data exists
-    $checkQuery = "SELECT * FROM aboutus";
-    $result = mysqli_query($conn, $checkQuery);
-
-    if (mysqli_num_rows($result) > 0) {
-        // Update data
-        $sql = "UPDATE aboutus 
-                SET description = '$description', 
-                    image = '$imageFilename' 
-                WHERE 26";  // Assuming you have a unique identifier for update
-
-        if (mysqli_query($conn, $sql)) {
-            echo "Data updated successfully!";
+    // Check if there is any data in the table
+    if ($count > 0) {
+        // Data exists, perform update query
+        $update_sql = "UPDATE aboutus SET title = ?, description = ?, image = ?";
+        $update_stmt = $conn->prepare($update_sql);
+        $update_stmt->bind_param("sss", $title, $description, $target_file);
+        if ($update_stmt->execute()) {
+            echo "Record updated successfully";
         } else {
-            echo "Error updating data: " . mysqli_error($conn);
+            echo "Error updating record: " . $update_stmt->error;
         }
+        $update_stmt->close();
     } else {
-        // Insert data
-        $sql = "INSERT INTO aboutus (title, description, image) 
-                VALUES ('$title', '$description', '$imageFilename')";
-
-        if (mysqli_query($conn, $sql)) {
-            echo "Data inserted successfully!";
+        // No data exists, perform insert query
+        $insert_sql = "INSERT INTO aboutus (title, description, image) VALUES (?, ?, ?)";
+        $insert_stmt = $conn->prepare($insert_sql);
+        $insert_stmt->bind_param("sss", $title, $description, $target_file);
+        if ($insert_stmt->execute()) {
+            echo "New record created successfully";
         } else {
-            echo "Error inserting data: " . mysqli_error($conn);
+            echo "Error inserting record: " . $insert_stmt->error;
         }
+        $insert_stmt->close();
     }
+
+    // Close connection
+    $conn->close();
 }
-
-// Close database connection
-mysqli_close($conn);
 ?>
-
-
-
-
-
-
-
-
 
 <main id="main" class="main">
     <div class="pagetitle">
@@ -102,19 +106,17 @@ mysqli_close($conn);
                 <form enctype="multipart/form-data" method="POST">
                     <div class="mb-3">
                         <label for="inputText" class="form-label">Title: </label>
-                        <input type="text" class="form-control" name="title" value="<?php echo $title ?>">
+                        <input type="text" class="form-control" name="title">
                     </div>
                     <div class="mb-3">
                         <label for="inputText" class="form-label">Description: </label>
-                        <input type="text" class="form-control" name="description" value="<?php echo $description ?>">
+                        <input type="text" class="form-control" name="description">
                     </div>
                     <div class="mb-3">
                         <label for="locationImage" class="form-label">Image: </label>
                         <input type="file" class="form-control" id="Image" name="Image">
                     </div>
 
-                    <!-- Hidden field to store the ID of the record to update -->
-                    <input type="hidden" name="id" value="<?php echo $id ?>">
                     <!-- Add other form elements as needed -->
 
                     <div class="mb-3">
@@ -126,34 +128,8 @@ mysqli_close($conn);
             </div>
         </div>
 
-    </div><!-- End container-fluid -->
-    <div class="card-body">
-        <h5 class="card-title">Edit About Us</h5>
 
-        <!-- Default Table -->
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Title</th>
-                    <th scope="col">Opration</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Lorem ipsum dolor sit...</td>
-                    <td>
-                        <a href="#" class="mx-3"><i class="bi bi-pencil"></i></a>
-                        <a href="#"><i class="bi bi-trash" style="color: red;"></i></a>
-
-                    </td>
-
-                </tr>
-
-            </tbody>
-        </table>
-        <!-- End Default Table Example -->
     </div>
 </main>
-
 
 <?php include 'includes/footer.php' ?>

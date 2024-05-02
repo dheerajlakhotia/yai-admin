@@ -59,39 +59,84 @@ function submitForm() {
 </script>
 
 <script>
-document.getElementById('image').addEventListener('change', function() {
-    var files = this.files;
-    var previewContainer = document.getElementById('image-preview-container');
-    previewContainer.innerHTML = ''; // Clear previous previews
+document.getElementById("submit-btn").addEventListener("click", function() {
+    var form = document.getElementById("activity-form");
+    var formData = new FormData(form);
 
-    if (files.length > 5) {
-        alert("You can upload maximum 5 images.");
-        this.value = ''; // Clear selected files
-        return;
-    }
-
-    for (var i = 0; i < files.length; i++) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            var img = document.createElement('img');
-            img.src = e.target.result;
-            img.style.maxWidth = '200px';
-            img.style.marginRight = '5px';
-            img.style.marginBottom = '5px';
-            previewContainer.appendChild(img);
-
-            var removeIcon = document.createElement('i');
-            removeIcon.className = 'bi bi-x-circle-fill remove-icon';
-            removeIcon.addEventListener('click', function() {
-                previewContainer.removeChild(img);
-                previewContainer.removeChild(removeIcon);
-                document.getElementById('image').value = ''; // Clear selected file
-            });
-            previewContainer.appendChild(removeIcon);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "submit_activity.php", true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                // Successful response
+                var response = xhr.responseText;
+                // Update the page with the response
+                var messageContainer = document.getElementById("message-container");
+                messageContainer.innerHTML = response;
+            } else {
+                // Error handling
+                console.error('Error occurred during form submission:', xhr.status);
+            }
         }
-        reader.readAsDataURL(files[i]);
-    }
+    };
+    xhr.send(formData);
 });
+</script>
+
+<script>
+function previewImage(inputId, imageId) {
+    var input = document.getElementById(inputId);
+    var image = document.getElementById(imageId);
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            image.src = e.target.result;
+            image.style.display = 'block';
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+} <
+/>
+
+
+<
+script >
+    document.getElementById('image').addEventListener('change', function() {
+        var files = this.files;
+        var previewContainer = document.getElementById('image-preview-container');
+        previewContainer.innerHTML = ''; // Clear previous previews
+
+        if (files.length > 5) {
+            alert("You can upload maximum 5 images.");
+            this.value = ''; // Clear selected files
+            return;
+        }
+
+        for (var i = 0; i < files.length; i++) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var img = document.createElement('img');
+                img.src = e.target.result;
+                img.style.maxWidth = '200px';
+                img.style.marginRight = '5px';
+                img.style.marginBottom = '5px';
+                previewContainer.appendChild(img);
+
+                var removeIcon = document.createElement('i');
+                removeIcon.className = 'bi bi-x-circle-fill remove-icon';
+                removeIcon.addEventListener('click', function() {
+                    previewContainer.removeChild(img);
+                    previewContainer.removeChild(removeIcon);
+                    document.getElementById('image').value = ''; // Clear selected file
+                });
+                previewContainer.appendChild(removeIcon);
+            }
+            reader.readAsDataURL(files[i]);
+        }
+    });
 
 document.getElementById('activity-form').addEventListener('submit', function(event) {
     event.preventDefault();

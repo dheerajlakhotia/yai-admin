@@ -42,13 +42,7 @@
                 <span>Volenteer</span>
             </a>
         </li><!-- End volenteer Page Nav -->
-        <li class="nav-item">
-            <a class="nav-link <?php if($active_page == 'certificate') echo 'active'; ?> collapsed"
-                href="certificate.php">
-                <i class="bi bi-award"></i>
-                <span>certificate</span>
-            </a>
-        </li><!-- End volenteer Page Nav -->
+
 
         <li class="nav-item">
             <a class="nav-link <?php if($active_page == 'donation') echo 'active'; ?> collapsed" href="donation.php">

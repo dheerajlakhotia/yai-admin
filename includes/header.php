@@ -1,5 +1,5 @@
 <?php
-
+include 'includes/dbconfig.php';
 // Check if session is not active
 if (session_status() === PHP_SESSION_NONE) {
     // Start the session
@@ -18,13 +18,41 @@ setcookie("username", "John", time() + (30 * 24 * 60 * 60), "/");
 // Set a cookie named "language" with the value "en" that expires when the browser is closed
 setcookie("language", "en", 0, "/");
 
-// Fetch and set the role_id in the session after the user logs in
-// Example: 
-// Assuming you have fetched $user_role from the database after login
-// and it contains the role ID of the user
-$_SESSION['role_id'] = $user_role;
+// Function to fetch user role from the database
+function getUserRoleFromDatabase() {
+    global $conn; // Declare $conn as a global variable
 
+    // Fetch the role_id for the logged-in user
+    $userId = $_SESSION["user_id"];
+    $sql = "SELECT role_id FROM yai_users WHERE id = $userId";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        // If a row is found, fetch the role_id and return it
+        $row = $result->fetch_assoc();
+        return $row["role_id"];
+    } else {
+        // If no row is found, return null or handle the case as needed
+        return null;
+    }
+}
+
+// Example: Fetch $user_role from the database after login
+// Assuming you have a function getUserRoleFromDatabase() that retrieves the user role
+$user_role = getUserRoleFromDatabase(); // This function should return the user's role
+
+// Check if $user_role is set and not null before setting it in the session
+if (isset($user_role)) {
+    $_SESSION['role_id'] = $user_role; // Corrected the session variable name
+} else {
+    // If $user_role is not set or null, you can handle the case here
+    // For example, you can set a default role ID
+    $_SESSION['role_id'] = DEFAULT_ROLE_ID; // Replace DEFAULT_ROLE_ID with a default role ID
+}
+
+echo "$user_role";
 ?>
+
 
 <?php
 $active_page = basename($_SERVER['PHP_SELF'], ".php");
