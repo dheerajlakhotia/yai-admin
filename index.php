@@ -115,6 +115,24 @@ $rank = 1;
         </div><!-- End Member Card -->
 
 
+        <?php
+// Assuming you have already established a database connection
+
+// Query to fetch the fund amount from the database
+$query = "SELECT amount FROM funds LIMIT 1"; // Assuming you only have one row in the funds table
+
+$result = mysqli_query($conn, $query);
+
+if (mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_assoc($result);
+    $fundAmount = $row['amount'];
+} else {
+    $fundAmount = "N/A"; // If no data found in the funds table
+}
+
+
+?>
+
         <!-- Revenue Card -->
         <div class="col-xxl-4 col-md-6">
             <div class="card info-card revenue-card">
@@ -127,7 +145,7 @@ $rank = 1;
                                     <i class="bi bi-currency-rupee"></i>
                                 </div>
                                 <div class="ps-3 mt-3">
-                                    <h6>5000rs</h6>
+                                    <h6><?php echo $fundAmount; ?></h6>
                                 </div>
                             </div>
                 </div>
@@ -142,7 +160,7 @@ $rank = 1;
 
 
                 <div class="card-body">
-                    <h5 class="card-title">Total childenes<span>
+                    <h5 class="card-title">Total children<span>
 
                             <div class="d-flex align-items-center">
                                 <div
@@ -150,11 +168,24 @@ $rank = 1;
                                     <i class="bi bi-people"></i>
                                 </div>
                                 <div class="ps-3 mt-3">
-                                    <h6>1244</h6>
+                                    <?php
+        // Query to get the total count of children
+        $totalChildrenQuery = "SELECT SUM(TotalChildren) AS TotalChildren FROM locations";
+        
+        // Execute the query
+        $totalChildrenResult = $conn->query($totalChildrenQuery);
+
+        // Fetch the result
+        $totalChildrenRow = $totalChildrenResult->fetch_assoc();
+        
+        // Output the total count of children
+        echo "<h6>{$totalChildrenRow['TotalChildren']}</h6>";
+        ?>
                                 </div>
                             </div>
 
                 </div>
+
             </div>
 
         </div><!-- End Customers Card -->
@@ -173,76 +204,41 @@ $rank = 1;
                                     <i class="bi bi-pin"></i>
                                 </div>
                                 <div class="ps-3 mt-3">
-                                    <h6>4</h6>
+                                    <?php
+                // Query to get the total count of locations
+                $totalLocationsQuery = "SELECT COUNT(*) AS TotalLocations FROM locations";
+
+                // Execute the query
+                $totalLocationsResult = $conn->query($totalLocationsQuery);
+
+                // Fetch the result
+                $totalLocationsRow = $totalLocationsResult->fetch_assoc();
+
+                // Output the total count of locations
+                echo "<h6>{$totalLocationsRow['TotalLocations']}</h6>";
+                ?>
                                 </div>
                             </div>
 
+                    </h5>
                 </div>
+
             </div>
 
         </div><!-- End Customers Card -->
-        <!-- News & Updates Traffic -->
-        <div class="col-lg">
-            <div class="card">
 
-                <div class="card-body pb-0">
-                    <h5 class="card-title">Blogs</h5>
 
-                    <div class="news">
-                        <div class="post-item clearfix">
-                            <img src="assets/img/news-1.jpg" alt="">
-                            <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
-                            <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut
-                                harum...</p>
-                        </div>
-
-                        <div class="post-item clearfix">
-                            <img src="assets/img/news-2.jpg" alt="">
-                            <h4><a href="#">Quidem autem et impedit</a></h4>
-                            <p>Illo nemo neque maiores vitae officiis cum eum turos elan dries werona
-                                nande...
-                            </p>
-                        </div>
-
-                        <div class="post-item clearfix">
-                            <img src="assets/img/news-3.jpg" alt="">
-                            <h4><a href="#">Id quia et et ut maxime similique occaecati ut</a></h4>
-                            <p>Fugiat voluptas vero eaque accusantium eos. Consequuntur sed ipsam et
-                                totam...
-                            </p>
-                        </div>
-
-                        <div class="post-item clearfix">
-                            <img src="assets/img/news-4.jpg" alt="">
-                            <h4><a href="#">Laborum corporis quo dara net para</a></h4>
-                            <p>Qui enim quia optio. Eligendi aut asperiores enim repellendusvel rerum
-                                cuder...
-                            </p>
-                        </div>
-
-                        <div class="post-item clearfix">
-                            <img src="assets/img/news-5.jpg" alt="">
-                            <h4><a href="#">Et dolores corrupti quae illo quod dolor</a></h4>
-                            <p>Odit ut eveniet modi reiciendis. Atque cupiditate libero beatae
-                                dignissimos
-                                eius...</p>
-                        </div>
-
-                    </div><!-- End sidebar recent posts-->
-
-                </div>
-            </div><!-- End News & Updates -->
-        </div>
         <div class="container">
-            <div class="card mb-3">
+            <div class="card shadow-sm">
                 <div class="card-body">
-                    <h5 class="card-title">Today Drive</h5>
+                    <h5 class="card-title mb-4">Today Drive - <?php echo date("Y-m-d"); ?></h5>
                     <div class="row">
                         <div class="col-12">
-                            <div class="list-group" id="list-tab" role="tablist">
+                            <div class="list-group list-group-horizontal" id="list-tab" role="tablist">
                                 <?php
-                            // Fetch unique locations from the activities table
-                            $sql = "SELECT DISTINCT location FROM activities";
+                            // Fetch unique locations from the activities table for the current date
+                            $current_date = date("Y-m-d");
+                            $sql = "SELECT DISTINCT location FROM activities WHERE DATE(created_at) = '$current_date'";
                             $result = mysqli_query($conn, $sql);
 
                             if (mysqli_num_rows($result) > 0) {
@@ -251,13 +247,13 @@ $rank = 1;
                                     echo '<a class="list-group-item list-group-item-action" id="list-' . str_replace(' ', '-', strtolower($row['location'])) . '-list" data-bs-toggle="list" href="#list-' . str_replace(' ', '-', strtolower($row['location'])) . '" role="tab" aria-controls="list-' . str_replace(' ', '-', strtolower($row['location'])) . '">' . $row['location'] . '</a>';
                                 }
                             } else {
-                                echo "<p>No activities found.</p>";
+                                echo "<p class='text-muted'>No activities found for today.</p>";
                             }
                             ?>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row mt-4">
                         <div class="col-12">
                             <div class="tab-content" id="nav-tabContent">
                                 <?php
@@ -266,49 +262,46 @@ $rank = 1;
 
                             if (mysqli_num_rows($result) > 0) {
                                 while ($row = mysqli_fetch_assoc($result)) {
-                                    // Fetch activities for the current location
+                                    // Fetch activities for the current location and date
                                     $location = $row['location'];
-                                    $activities_query = "SELECT * FROM activities WHERE location = '$location'";
+                                    $activities_query = "SELECT * FROM activities WHERE location = '$location' AND DATE(created_at) = '$current_date'";
                                     $activities_result = mysqli_query($conn, $activities_query);
                                     ?>
                                 <!-- Display activity details for each location -->
-                                <div class="tab-pane fade"
+                                <div class="tab-pane fade show"
                                     id="list-<?php echo str_replace(' ', '-', strtolower($location)); ?>"
                                     role="tabpanel"
                                     aria-labelledby="list-<?php echo str_replace(' ', '-', strtolower($location)); ?>-list">
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead>
-                                                <tr>
+                                                <tr class="text-dark">
                                                     <th scope="col">User</th>
-                                                    <th scope="col">Start & End Time</th>
+                                                    <th scope="col">Time</th>
                                                     <th scope="col">Description</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                    // Display activities for the current location
-                                                    while ($activity_row = mysqli_fetch_assoc($activities_result)) {
-                                                        // Fetch user's name from yai_users table
-                                                        $user_id = $activity_row['user_id'];
-                                                        $user_query = "SELECT name FROM yai_users WHERE id = '$user_id'";
-                                                        $user_result = mysqli_query($conn, $user_query);
-                                                        $user_data = mysqli_fetch_assoc($user_result);
+                                            // Display activities for the current location and date
+                                            while ($activity_row = mysqli_fetch_assoc($activities_result)) {
+                                                // Fetch user's name from yai_users table
+                                                $user_id = $activity_row['user_id'];
+                                                $user_query = "SELECT name FROM yai_users WHERE id = '$user_id'";
+                                                $user_result = mysqli_query($conn, $user_query);
+                                                $user_data = mysqli_fetch_assoc($user_result);
 
-                                                        // Format start time and end time
-                                                        $start_time = date('h:i A', strtotime($activity_row['start_time']));
-                                                        $end_time = date('h:i A', strtotime($activity_row['end_time']));
+                                                // Format start time and end time
+                                                $start_time = date('h:i A', strtotime($activity_row['start_time']));
+                                                $end_time = date('h:i A', strtotime($activity_row['end_time']));
 
-                                                        // Combine start time and end time
-                                                        $time_range = $start_time . ' - ' . $end_time;
-
-                                                        echo '<tr>
-                                                                <td>' . $user_data['name'] . '</td>
-                                                                <td>' . $time_range . '</td>
-                                                                <td>' . $activity_row['description'] . '</td>
-                                                            </tr>';
-                                                    }
-                                                    ?>
+                                                echo '<tr>
+                                                        <td>' . $user_data['name'] . '</td>
+                                                        <td>' . $start_time . ' - ' . $end_time . '</td>
+                                                        <td>' . $activity_row['description'] . '</td>
+                                                    </tr>';
+                                            }
+                                            ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -323,6 +316,7 @@ $rank = 1;
                 </div>
             </div>
         </div>
+
 
 
 
@@ -349,54 +343,6 @@ if ($user_role == 1) {
     // Display the section for founding members
     ?>
 
-        <!-- Contact Messages -->
-        <div class="container">
-            <h2 class="card-title">Contact Messages</h2>
-            <?php
-        // Query to fetch data from the ContactForm table
-        $sql_contact = "SELECT * FROM contactform";
-        $result_contact = $conn->query($sql_contact);
-
-        // Check for errors
-        if (!$result_contact) {
-            // Query execution failed
-            echo "Error: " . $conn->error;
-        } else {
-            // Check if any rows were returned
-            if ($result_contact->num_rows > 0) {
-                echo "<div class='table-responsive'>";
-                echo "<table class='table table-bordered table-striped mt-4 text-center'>";
-                echo "<thead class='table-dark'>";
-                echo "<tr>";
-                echo "<th scope='col'>S.No.</th>";
-                echo "<th scope='col'>Name</th>";
-                echo "<th scope='col'>Email</th>";
-                echo "<th scope='col'>Subject</th>";
-                echo "<th scope='col'>Message</th>";
-                echo "<th scope='col'>Actions</th>";
-                echo "</tr>";
-                echo "</thead>";
-                echo "<tbody>";
-                while ($row_contact = $result_contact->fetch_assoc()) {
-                    echo "<tr>";
-                    echo "<td>" . $row_contact["id"] . "</td>";
-                    echo "<td>" . $row_contact["name"] . "</td>";
-                    echo "<td>" . $row_contact["email"] . "</td>";
-                    echo "<td>" . $row_contact["subject"] . "</td>";
-                    echo "<td>" . $row_contact["message"] . "</td>";
-                    echo "<td><button type='button' class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#deleteModal'><i class='bi bi-x'></i></button></td>";
-                    echo "</tr>";
-                }
-                echo "</tbody>";
-                echo "</table>";
-                echo "</div>";
-            } else {
-                // No records found
-                echo "<p>No contact messages found.</p>";
-            }
-        }
-        ?>
-        </div>
 
         <!-- volenteer req -->
         <div class="container">

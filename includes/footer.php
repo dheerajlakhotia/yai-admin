@@ -83,6 +83,8 @@ document.getElementById("submit-btn").addEventListener("click", function() {
 });
 </script>
 
+
+
 <script>
 function previewImage(inputId, imageId) {
     var input = document.getElementById(inputId);

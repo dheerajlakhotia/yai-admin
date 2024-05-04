@@ -140,7 +140,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="card-body">
         <h5 class="card-title">Default Table</h5>
-        <span>Total Location: 4</span>
+        <?php
+    // Query to fetch data from the locations table
+    $locationsQuery = "SELECT * FROM locations";
+    $locationsResult = $conn->query($locationsQuery);
+    
+    if ($locationsResult->num_rows > 0) {
+        ?>
+        <!-- Total Location: -->
+        <span>Total Location: <?php echo $locationsResult->num_rows; ?></span>
         <!-- Default Table -->
         <table class="table">
             <thead>
@@ -151,18 +159,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </tr>
             </thead>
             <tbody>
+                <?php
+                // Counter for serial number
+                $serialNumber = 1;
+                
+                // Loop through each row of the result set
+                while ($row = $locationsResult->fetch_assoc()) {
+                    ?>
                 <tr>
-                    <th scope="row">1</th>
-                    <td>mdv colony</td>
+                    <th scope="row"><?php echo $serialNumber; ?></th>
+                    <td><?php echo $row["LocationName"]; ?></td>
                     <td>
-                        <span class="bi bi-pencil-square text-primary" title="Edit"></span>
-                        <span class="bi bi-trash text-danger" title="Delete"></span>
+                        <a href="#" class="btn btn-sm btn-primary" title="Edit">Edit</a>
+                        <a href="#" class="btn btn-sm btn-danger" title="Delete">Delete</a>
                     </td>
                 </tr>
+                <?php
+                    // Increment serial number for the next row
+                    $serialNumber++;
+                }
+                ?>
             </tbody>
         </table>
         <!-- End Default Table Example -->
+        <?php
+    } else {
+        echo "No locations found.";
+    }
+    ?>
     </div>
+
 </main>
 
 <?php include 'includes/footer.php' ?>

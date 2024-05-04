@@ -18,7 +18,56 @@
         <div class="card">
             <div class="card-body mt-4">
                 <h2 class="text-center">Event Form</h2>
-                <form id="eventForm" action="submit_event.php" method="post" enctype="multipart/form-data">
+                <?php
+// Check if form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+   
+
+    // Escape user inputs for security
+    $eventName = mysqli_real_escape_string($conn, $_POST['eventName']);
+    $venue = mysqli_real_escape_string($conn, $_POST['venue']);
+    $description = mysqli_real_escape_string($conn, $_POST['description']);
+    $date = mysqli_real_escape_string($conn, $_POST['date']);
+
+    // File upload handling
+    $uploadDirectory = "../uploads/";
+    $imageUrls = array();
+    if(isset($_FILES['image']['name']) && !empty($_FILES['image']['name'][0])) {
+        $fileNames = $_FILES['image']['name'];
+        $fileTmpNames = $_FILES['image']['tmp_name'];
+        $fileError = $_FILES['image']['error'];
+
+        foreach($fileTmpNames as $key => $fileTmpName) {
+            if($fileError[$key] === 0) {
+                $fileName = $fileNames[$key];
+                $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+                $uniqueFileName = uniqid('', true) . "." . $fileExt;
+                $fileDestination = $uploadDirectory . $uniqueFileName;
+                move_uploaded_file($fileTmpName, $fileDestination);
+                $imageUrl = $fileDestination;
+                array_push($imageUrls, $imageUrl);
+            }
+        }
+    }
+
+    // Insert data into database
+    $sql = "INSERT INTO events (event_name, venue, description, event_date) VALUES ('$eventName', '$venue', '$description', '$date')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "New record created successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    // Close connection
+    $conn->close();
+} else {
+    echo "Form not submitted!";
+}
+?>
+
+                <form id="eventForm" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post"
+                    enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="eventName">Event Name:</label>
                         <input type="text" class="form-control" id="eventName" name="eventName" required>
@@ -49,7 +98,6 @@
 
                     <button type="submit" class="btn btn-primary btn-block">Submit</button>
                 </form>
-
 
                 <div class="mt-5">
                     <h2 class="text-center">All Events</h2>

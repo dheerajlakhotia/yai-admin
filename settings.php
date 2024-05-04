@@ -196,6 +196,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitAboutVideo'])) {
         </div>
     </div>
 
+    <?php
+// Assuming you have already established a database connection
+
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitTotalFund'])) {
+    // Retrieve total fund value from form
+    $totalFund = isset($_POST['totalfund']) ? $_POST['totalfund'] : '';
+
+    // Prepare the query to check if data exists in the table
+    $checkQuery = "SELECT id FROM funds LIMIT 1";
+    $checkResult = mysqli_query($conn, $checkQuery);
+
+    // If data exists, update it; otherwise, insert new data
+    if (mysqli_num_rows($checkResult) > 0) {
+        // Data exists, update the existing row
+        $updateQuery = "UPDATE funds SET amount = '$totalFund' LIMIT 1"; // Assuming you want to update the first row
+        mysqli_query($conn, $updateQuery);
+    } else {
+        // Data does not exist, insert new row
+        $insertQuery = "INSERT INTO funds (amount) VALUES ('$totalFund')";
+        mysqli_query($conn, $insertQuery);
+    }
+}
+?>
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Total Fund
+                </h2>
+                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                    <div class="form-group">
+                        <label for="youtubelink">Total Fund</label>
+                        <input type="text" class="form-control mt-2" id="totalfund" name="totalfund"
+                            placeholder="Enter Total Fund">
+                    </div>
+                    <button type="submit" name="submitTotalFund" class="btn btn-primary mt-3">Save</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
 
 
     <?php
@@ -290,7 +333,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
             }
         }
     } else {
-        echo "Please select files to upload.";
+      
     }
 }
 ?>
@@ -298,21 +341,122 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     <div class="container">
         <div class="card">
             <div class="card-body mt-4">
-                <h2 class="card-title">Logo and Favicon Settings</h2>
-                <form enctype="multipart/form-data" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                    <div class="form-group">
-                        <label for="logoUpload">Upload Logo (Max: 10MB)</label>
-                        <input type="file" class="form-control-file" id="logoUpload" name="logoUpload">
+                <h2 class="card-title">FAQ Settings</h2>
+                <?php
+// Assuming you have already established a database connection
+
+// Check if the form is submitted and the delete button is clicked
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
+    // Check if the ID is provided
+    if (isset($_POST['delete_id'])) {
+        $delete_id = $_POST['delete_id'];
+        
+        // Prepare and execute the delete query
+        $sql_delete = "DELETE FROM faq_table WHERE id = $delete_id";
+        if ($conn->query($sql_delete) === TRUE) {
+            // Delete successful
+            echo "FAQ deleted successfully.";
+        } else {
+            // Delete failed
+            echo "Error: " . $sql_delete . "<br>" . $conn->error;
+        }
+    } else {
+        // Display error message if ID is not provided
+        echo "No ID provided for deletion.";
+    }
+}
+
+// Check if the form is submitted and the submit button is clicked for adding new FAQ entry
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
+    // Check if form fields are not empty
+    if (!empty($_POST['question']) && !empty($_POST['answer'])) {
+        // Retrieve form data
+        $question = $_POST['question'];
+        $answer = $_POST['answer'];
+
+        // Prepare and execute the insert query
+        $sql_insert = "INSERT INTO faq_table (question, answer) VALUES ('$question', '$answer')";
+        if ($conn->query($sql_insert) === TRUE) {
+            // Insert successful
+            echo "New FAQ created successfully.";
+        } else {
+            // Insert failed
+            echo "Error: " . $sql_insert . "<br>" . $conn->error;
+        }
+    } else {
+        // Display error message if form fields are empty
+        echo "Please fill out all the form fields.";
+    }
+}
+
+// Fetch FAQ records from the database
+$sql_faq = "SELECT * FROM faq_table";
+$result_faq = $conn->query($sql_faq);
+
+// HTML code for the page
+?>
+
+                <div class="container">
+                    <div class="card">
+                        <div class="card-body mt-4">
+                            <h2 class="card-title">FAQ Settings</h2>
+
+                            <!-- FAQ Form -->
+                            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                                <div class="form-group">
+                                    <label for="question">Question</label>
+                                    <input type="text" class="form-control" id="question" name="question"
+                                        placeholder="Enter the question" required>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="answer">Answer</label>
+                                    <textarea class="form-control" id="answer" name="answer" rows="3"
+                                        placeholder="Enter the answer" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary" name="submit">Save FAQ</button>
+                            </form>
+
+                            <!-- FAQ Table -->
+                            <div class="mt-4">
+                                <h2 class="card-title">FAQ List</h2>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Question</th>
+                                            <th scope="col">Answer</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                        // Display FAQ records in table
+                        if ($result_faq->num_rows > 0) {
+                            while ($row_faq = $result_faq->fetch_assoc()) {
+                                echo "<tr>";
+                                echo "<td>" . $row_faq['question'] . "</td>";
+                                echo "<td>" . $row_faq['answer'] . "</td>";
+                                // Action column with Delete button
+                                echo "<td>";
+                                echo "<form method='post' action='" . htmlspecialchars($_SERVER["PHP_SELF"]) . "'>";
+                                echo "<input type='hidden' name='delete_id' value='" . $row_faq['id'] . "'>";
+                                echo "<button type='submit' class='btn btn-danger btn-sm' name='delete'>Delete</button>";
+                                echo "</form>";
+                                echo "</td>";
+                                echo "</tr>";
+                            }
+                        } else {
+                            // No FAQs found
+                            echo "<tr><td colspan='3'>No FAQs found.</td></tr>";
+                        }
+                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group mb-2">
-                        <label for="faviconUpload">Upload Favicon (Max: 10MB)</label>
-                        <input type="file" class="form-control-file" id="faviconUpload" name="faviconUpload">
-                    </div>
-                    <button type="submit" class="btn btn-primary" name="submit">Save Changes</button>
-                </form>
-            </div>
-        </div>
-    </div>
+                </div>
+
+
 
 
 

@@ -52,13 +52,6 @@
         </li><!-- End donation Page Nav -->
 
         <li class="nav-item">
-            <a class="nav-link  <?php if($active_page == 'blog') echo 'active'; ?> collapsed" href="blog.php">
-                <i class="bi bi-pencil-square"></i>
-                <span>Blog</span>
-            </a>
-        </li><!-- End blog Page Nav -->
-
-        <li class="nav-item">
             <a class="nav-link <?php if($active_page == 'gallery') echo 'active'; ?> collapsed" href="gallery.php">
                 <i class="bi bi-image"></i>
                 <span>Gallery</span>
