@@ -1,8 +1,15 @@
-<?php require 'includes/header.php'?>
+<?php 
+require 'includes/header.php';
+require 'includes/navbar.php';
+require 'includes/sidebar.php';
 
-<?php require 'includes/navbar.php'?>
+// Query to fetch data from the FAQ table
+$sql = "SELECT * FROM faq_table";
 
-<?php require 'includes/sidebar.php'?>
+// Execute the query using the existing database connection
+$result = $conn->query($sql);
+
+?>
 
 <main id="main" class="main">
 
@@ -20,25 +27,29 @@
     <div class="col-lg-6">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Deserunt ut unde corporis</h5>
-                <div class="accordion accordion-flush" id="faq-group-2">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" data-bs-target="#faqsTwo-1" type="button"
-                                data-bs-toggle="collapse">
-                                Cumque voluptatem recusandae blanditiis?
-                            </button>
-                        </h2>
-                        <div id="faqsTwo-1" class="accordion-collapse collapse" data-bs-parent="#faq-group-2">
-                            <div class="accordion-body">
-                                Ut quasi odit odio totam accusamus vero eius. Nostrum asperiores voluptatem
-                                eos nulla ab dolores est asperiores iure. Quo est quis praesentium aut
-                                maiores. Corrupti sed aut expedita fugit vero dolorem. Nemo rerum sapiente.
-                                A quaerat dignissimos.
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php 
+                // Check if there are FAQs available
+                if ($result->num_rows > 0) {
+                    // Output data of each row
+                    while($row = $result->fetch_assoc()) {
+                       
+                        echo '<div class="accordion accordion-flush" id="faq-group-' . $row["id"] . '">';
+                        echo '<div class="accordion-item">';
+                        echo '<h2 class="accordion-header">';
+                        echo '<button class="accordion-button collapsed" data-bs-target="#faqsTwo-' . $row["id"] . '" type="button" data-bs-toggle="collapse">';
+                        echo $row["question"];
+                        echo '</button>';
+                        echo '</h2>';
+                        echo '<div id="faqsTwo-' . $row["id"] . '" class="accordion-collapse collapse" data-bs-parent="#faq-group-' . $row["id"] . '">';
+                        echo '<div class="accordion-body">' . $row["answer"] . '</div>';
+                        echo '</div>';
+                        echo '</div>';
+                        echo '</div>';
+                    }
+                } else {
+                    echo "No FAQs available";
+                }
+                ?>
             </div>
         </div>
     </div>
@@ -47,4 +58,4 @@
 
 </main><!-- End #main -->
 
-<?php include 'includes/footer.php' ?>
+<?php include 'includes/footer.php'; ?>

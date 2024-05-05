@@ -4,7 +4,7 @@
         &copy; Copyright <strong><span>YAI</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
-        Designed by <a href="#">Dheeraj</a>
+        Designed by <a href="#">PixalTide</a>
     </div>
 </footer><!-- End Footer -->
 
@@ -58,30 +58,7 @@ function submitForm() {
 }
 </script>
 
-<script>
-document.getElementById("submit-btn").addEventListener("click", function() {
-    var form = document.getElementById("activity-form");
-    var formData = new FormData(form);
 
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "submit_activity.php", true);
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                // Successful response
-                var response = xhr.responseText;
-                // Update the page with the response
-                var messageContainer = document.getElementById("message-container");
-                messageContainer.innerHTML = response;
-            } else {
-                // Error handling
-                console.error('Error occurred during form submission:', xhr.status);
-            }
-        }
-    };
-    xhr.send(formData);
-});
-</script>
 
 
 
