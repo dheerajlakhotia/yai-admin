@@ -7,26 +7,29 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])) {
     // Sanitize the input to prevent SQL injection
     $user_id = htmlspecialchars($_GET['id']);
 
-    // Prepare a DELETE statement
-    $sql = "DELETE FROM yai_users WHERE id = ?";
+    // Delete associated records in the activities table
+    $sql_delete_activities = "DELETE FROM activities WHERE user_id = ?";
+    $stmt_delete_activities = $conn->prepare($sql_delete_activities);
+    $stmt_delete_activities->bind_param('i', $user_id);
+    $stmt_delete_activities->execute();
+    $stmt_delete_activities->close();
 
-    // Prepare the SQL statement
-    $stmt = $conn->prepare($sql);
+    // Prepare a DELETE statement for the user
+    $sql_delete_user = "DELETE FROM yai_users WHERE id = ?";
+    $stmt_delete_user = $conn->prepare($sql_delete_user);
+    $stmt_delete_user->bind_param('i', $user_id);
 
-    // Bind parameters
-    $stmt->bind_param('i', $user_id);
-
-    // Execute the statement
-    if ($stmt->execute()) {
+    // Execute the DELETE statement for the user
+    if ($stmt_delete_user->execute()) {
         // User deleted successfully, redirect to the volunteer page
         header("Location: volenteer.php");
         exit; // Ensure that script execution stops after redirection
     } else {
-        echo "Error: " . $stmt->error;
+        echo "Error: " . $stmt_delete_user->error;
     }
 
     // Close the statement
-    $stmt->close();
+    $stmt_delete_user->close();
 } else {
     // Redirect to an error page or display an error message
     echo "Invalid user ID.";

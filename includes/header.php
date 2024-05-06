@@ -94,8 +94,24 @@ $page_title = isset($page_titles[$active_page]) ? $page_titles[$active_page] : '
     <meta content="" name="description">
     <meta content="" name="keywords">
 
-    <!-- Favicons -->
-    <link href="assets/img/favicon.ico" rel="icon">
+
+    <?php
+    // Fetch favicon path from the database
+    $sql_favicon = "SELECT favicon FROM image LIMIT 1"; // Assuming there's only one row in the image table
+    $result_favicon = mysqli_query($conn, $sql_favicon);
+
+    if (mysqli_num_rows($result_favicon) > 0) {
+    $row_favicon = mysqli_fetch_assoc($result_favicon);
+    $faviconPath = $row_favicon['favicon'];
+    } else {
+    // If no favicon path found in the database, set a default path
+    $faviconPath = "images/default-favicon.ico"; // Path to a default favicon image
+    }
+    ?>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="<?php echo $faviconPath; ?>">
+
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">

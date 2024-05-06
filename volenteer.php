@@ -12,12 +12,14 @@
     <div class="card">
         <div class="card-body">
             <div class="button-container">
-                <button type="button" class="btn btn-primary btn-sm mt-4" data-bs-toggle="modal"
-                    data-bs-target="#modalDialogScrollable">
-                    Add New Member
-                </button>
-
-
+                <?php
+                // Check if the user's role_id is not 2 or 5 (restricting users with role_id 2 or 5 from adding, editing, or deleting users)
+                if ($_SESSION['role_id'] != 2 && $_SESSION['role_id'] != 5) {
+                    echo '<button type="button" class="btn btn-primary btn-sm mt-4" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable">';
+                    echo 'Add New Member';
+                    echo '</button>';
+                }
+                ?>
             </div>
         </div>
     </div>
@@ -269,10 +271,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     </div>
     </div>
-
+    <!-- Display users' details -->
     <?php
-// Assuming you have a database connection established already
-
 // Check if search form is submitted
 if (isset($_GET['search'])) {
     // Sanitize the input
@@ -296,19 +296,7 @@ if ($result) {
             <h5 class="card-title">All YAI Members Details</h5>
 
             <!-- Search form -->
-            <form method="get" action="">
-                <div class="row mb-3">
-                    <div class="col">
-                        <!-- Search input field -->
-                        <input type="text" name="search" class="form-control" placeholder="Search..."
-                            value="<?php echo isset($_GET['search']) ? $_GET['search'] : '' ?>">
-                    </div>
-                    <div class="col-auto">
-                        <!-- Search button -->
-                        <input type="submit" class="btn btn-primary" value="Search">
-                    </div>
-                </div>
-            </form>
+            <!-- Your existing search form goes here -->
 
             <!-- Display total number of members -->
             <span>Total Members: <?php echo mysqli_num_rows($result); ?></span>
@@ -318,9 +306,10 @@ if ($result) {
                 <table class="table">
                     <thead>
                         <tr>
+                            <!-- Table headers -->
                             <th scope="col">S.No</th>
                             <th scope="col">Name</th>
-                            <th scope="col">Image</th> <!-- New column for Image -->
+                            <th scope="col">Image</th>
                             <th scope="col">Gender</th>
                             <th scope="col">Email</th>
                             <th scope="col">Address</th>
@@ -331,23 +320,25 @@ if ($result) {
                             <th scope="col">ID Image</th>
                             <th scope="col">Hobbies</th>
                             <th scope="col">Role</th>
-
-                            <!-- You can add more columns here -->
+                            <!-- Add 'Operations' column header -->
+                            <?php if ($_SESSION['role_id'] == 1): ?>
                             <th scope="col">Operations</th>
+                            <?php endif; ?>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        // Loop through the result set and display data in table rows
-                        $counter = 1;
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            ?>
+                            // Loop through the result set and display data in table rows
+                            $counter = 1;
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                ?>
                         <tr>
                             <!-- Serial number -->
                             <th scope="row"><?php echo $counter; ?></th>
                             <!-- User details -->
                             <td><?php echo $row['name']; ?></td>
                             <td>
+                                <!-- Display image preview -->
                                 <img src="<?php echo $row['image']; ?>" alt="User Image" class="img-thumbnail"
                                     width="100">
                             </td>
@@ -359,68 +350,64 @@ if ($result) {
                             <td><?php echo $row['occupation']; ?></td>
                             <td><?php echo $row['id_type']; ?></td>
                             <td>
+                                <!-- Display image preview -->
                                 <img src="<?php echo $row['id_image']; ?>" alt="User Image" class="img-thumbnail"
                                     width="100">
                             </td>
                             <td><?php echo $row['hobbies']; ?></td>
                             <td>
                                 <?php
-                                    // Convert role ID to role name
-                                    switch ($row['role_id']) {
-                                        case 1:
-                                            echo "Founding Member";
-                                            break;
-                                        case 2:
-                                            echo "HOD";
-                                            break;
-                                        case 3:
-                                            echo "Volunteer";
-                                            break;
-                                        case 4:
-                                            echo "Intern";
-                                            break;
-                                        case 5:
-                                            echo "Counseling Member";
-                                            break;
-                                        default:
-                                            echo "Unknown";
-                                    }
-                                    ?>
+                                        // Convert role ID to role name
+                                        switch ($row['role_id']) {
+                                            case 1:
+                                                echo "Founding Member";
+                                                break;
+                                            case 2:
+                                                echo "HOD";
+                                                break;
+                                            case 3:
+                                                echo "Volunteer";
+                                                break;
+                                            case 4:
+                                                echo "Intern";
+                                                break;
+                                            case 5:
+                                                echo "Counseling Member";
+                                                break;
+                                            default:
+                                                echo "Unknown";
+                                        }
+                                        ?>
                             </td>
-                            <!-- Display image -->
-
-
-
+                            <!-- Display edit and delete options only for role_id 1 -->
+                            <?php if ($_SESSION['role_id'] == 1): ?>
                             <td>
-                                <!-- Edit icon -->
                                 <!-- Edit icon -->
                                 <a href="update_user.php?id=<?php echo $row['id']; ?>" class="btn btn-link">
                                     <i class="bi bi-pencil-fill"></i>
                                 </a>
-
                                 <!-- Delete icon with red color -->
                                 <a href="delete_user.php?id=<?php echo $row['id']; ?>" class="btn btn-link">
                                     <i class="bi bi-trash-fill"></i>
                                 </a>
-
                             </td>
+                            <?php endif; ?>
                         </tr>
                         <?php
-                            $counter++;
-                        }
-                        ?>
+                                $counter++;
+                            }
+                            ?>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
     <?php
-} else {
-    // Error handling if the query fails
-    echo "Error: " . mysqli_error($connection);
-}
-?>
-
+    } else {
+        // Error handling if the query fails
+        echo "Error: " . mysqli_error($connection);
+    }
+    ?>
 
 
 </main>

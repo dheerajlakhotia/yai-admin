@@ -40,15 +40,25 @@ if ($result->num_rows > 0) {
 }
 ?>
 <!-- ======= Header ======= -->
+
+<?php
+$sql = "SELECT * FROM image";
+$result = $conn->query($sql);
+$row = $result->fetch_assoc(); // Fetch the first row from the result
+
+$logo = $row['logo']; // Assuming 'logo' is the column name for the logo URL in the database
+?>
+
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
         <a href="index.php" class="logo d-flex align-items-center">
-            <img src="assets/img/logo.jpg" alt="" style="border-radius: 50%;">
+            <img src="<?php echo $logo; ?>" alt="" style="border-radius: 50%;">
             <span class="d-none d-lg-block">YAI</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
+
 
 
     <nav class="header-nav ms-auto">
