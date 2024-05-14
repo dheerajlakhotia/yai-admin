@@ -196,48 +196,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitAboutVideo'])) {
         </div>
     </div>
 
-    <?php
-// Assuming you have already established a database connection
 
-// Check if the form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitTotalFund'])) {
-    // Retrieve total fund value from form
-    $totalFund = isset($_POST['totalfund']) ? $_POST['totalfund'] : '';
-
-    // Prepare the query to check if data exists in the table
-    $checkQuery = "SELECT id FROM funds LIMIT 1";
-    $checkResult = mysqli_query($conn, $checkQuery);
-
-    // If data exists, update it; otherwise, insert new data
-    if (mysqli_num_rows($checkResult) > 0) {
-        // Data exists, update the existing row
-        $updateQuery = "UPDATE funds SET amount = '$totalFund' LIMIT 1"; // Assuming you want to update the first row
-        mysqli_query($conn, $updateQuery);
-    } else {
-        // Data does not exist, insert new row
-        $insertQuery = "INSERT INTO funds (amount) VALUES ('$totalFund')";
-        mysqli_query($conn, $insertQuery);
-    }
-}
-?>
-    <div class="container">
-        <div class="card">
-            <div class="card-body">
-                <h2 class="card-title">
-                    Total Fund
-                </h2>
-                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                    <div class="form-group">
-                        <label for="youtubelink">Total Fund</label>
-                        <input type="text" class="form-control mt-2" id="totalfund" name="totalfund"
-                            placeholder="Enter Total Fund">
-                    </div>
-                    <button type="submit" name="submitTotalFund" class="btn btn-primary mt-3">Save</button>
-                </form>
-
-            </div>
-        </div>
-    </div>
 
 
 
@@ -396,39 +355,112 @@ $result_faq = $conn->query($sql_faq);
 // HTML code for the page
 ?>
 
-                <div class="container">
+                <div class="contanier">
                     <div class="card">
-                        <div class="card-body mt-4">
-                            <h2 class="card-title">FAQ Settings</h2>
+                        <div class="card-body">
+                            <div class="container mt-5">
+                                <h2 class="card-title">Upload Banner Image</h2>
+                                <!-- PHP Code to Handle Image Upload -->
+                                <?php
+// Handling image upload
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["image"])) {
+    $uploadDir = "../uploads/"; // Directory to save uploaded images
+    $uploadFile = $uploadDir . basename($_FILES["image"]["name"]);
+    $imageFileType = strtolower(pathinfo($uploadFile, PATHINFO_EXTENSION));
 
-                            <!-- FAQ Form -->
-                            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                                <div class="form-group">
-                                    <label for="question">Question</label>
-                                    <input type="text" class="form-control" id="question" name="question"
-                                        placeholder="Enter the question" required>
-                                </div>
-                                <div class="form-group mb-2">
-                                    <label for="answer">Answer</label>
-                                    <textarea class="form-control" id="answer" name="answer" rows="3"
-                                        placeholder="Enter the answer" required></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-primary" name="submit">Save FAQ</button>
-                            </form>
+    // Check if image file is a valid image
+    $check = getimagesize($_FILES["image"]["tmp_name"]);
+    if ($check === false) {
+        echo "<div class='alert alert-danger' role='alert'>File is not an image.</div>";
+    } else {
+        // Check file size
+        if ($_FILES["image"]["size"] > 5000000) { // 5MB
+            echo "<div class='alert alert-danger' role='alert'>Sorry, your file is too large.</div>";
+        } else {
+            // Allow certain file formats
+            if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+                echo "<div class='alert alert-danger' role='alert'>Sorry, only JPG, JPEG, PNG & GIF files are allowed.</div>";
+            } else {
+                // Move uploaded file to the uploads directory
+                if (move_uploaded_file($_FILES["image"]["tmp_name"], $uploadFile)) {
+                    // Construct full path of uploaded image
+                    $imagePath = $uploadDir . $_FILES["image"]["name"];
+                    // Check if the record already exists
+                    $result = $conn->query("SELECT * FROM bannerimage LIMIT 1");
+                    if ($result->num_rows > 0) {
+                        // Update the existing record
+                        $sql = "UPDATE bannerimage SET image_name = '$imagePath' WHERE id = 8"; // Replace 'id' with your primary key column
+                    } else {
+                        // Insert a new record
+                        $sql = "INSERT INTO bannerimage (image_name) VALUES ('$imagePath')";
+                    }
+                    if ($conn->query($sql) === TRUE) {
+                        echo "<div class='alert alert-success' role='alert'>The image has been uploaded successfully.</div>";
+                    } else {
+                        echo "<div class='alert alert-danger' role='alert'>Error: " . $sql . "<br>" . $conn->error . "</div>";
+                    }
+                } else {
+                    echo "<div class='alert alert-danger' role='alert'>Sorry, there was an error uploading your file.</div>";
+                }
+            }
+        }
+    }
+}
 
-                            <!-- FAQ Table -->
-                            <div class="mt-4">
-                                <h2 class="card-title">FAQ List</h2>
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Question</th>
-                                            <th scope="col">Answer</th>
-                                            <th scope="col">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
+// Close database connection
+$conn->close();
+?>
+
+                                <!-- End of PHP Code -->
+                                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST"
+                                    enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <label for="image">Choose Image</label>
+                                        <input type="file" class="form-control-file" id="image" name="image"
+                                            accept="image/*" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-block">Upload</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="card">
+                <div class="card-body mt-4">
+                    <h2 class="card-title">FAQ Settings</h2>
+
+                    <!-- FAQ Form -->
+                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                        <div class="form-group">
+                            <label for="question">Question</label>
+                            <input type="text" class="form-control" id="question" name="question"
+                                placeholder="Enter the question" required>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label for="answer">Answer</label>
+                            <textarea class="form-control" id="answer" name="answer" rows="3"
+                                placeholder="Enter the answer" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" name="submit">Save FAQ</button>
+                    </form>
+
+                    <!-- FAQ Table -->
+                    <div class="mt-4">
+                        <h2 class="card-title">FAQ List</h2>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Question</th>
+                                    <th scope="col">Answer</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
                         // Display FAQ records in table
                         if ($result_faq->num_rows > 0) {
                             while ($row_faq = $result_faq->fetch_assoc()) {
@@ -449,12 +481,12 @@ $result_faq = $conn->query($sql_faq);
                             echo "<tr><td colspan='3'>No FAQs found.</td></tr>";
                         }
                         ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+            </div>
+        </div>
 
 
 

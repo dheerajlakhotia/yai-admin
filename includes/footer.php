@@ -59,6 +59,30 @@ function submitForm() {
 </script>
 
 
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Edit Activity Button Click Event
+    const editActivityButtons = document.querySelectorAll('.edit-activity-btn');
+    editActivityButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const activityId = button.getAttribute('data-activity-id');
+            // Fetch activity details from the server using AJAX
+            // Populate the form fields in the modal with the fetched data
+            // For example:
+            // fetch('get_activity_details.php?id=' + activityId)
+            //     .then(response => response.json())
+            //     .then(data => {
+            //         document.getElementById('edit-activity-id').value = data.id;
+            //         document.getElementById('edit-location').value = data.location;
+            //         document.getElementById('edit-description').value = data.description;
+            //         document.getElementById('edit-start-time').value = data.start_time;
+            //         document.getElementById('edit-end-time').value = data.end_time;
+            //     })
+            //     .catch(error => console.error('Error fetching activity details:', error));
+        });
+    });
+});
+</script>
 
 
 

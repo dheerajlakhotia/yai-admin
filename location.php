@@ -11,6 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $totalChildrens = $_POST['totalChildrens'];
     $totalVolunteers = $_POST['totalVolunteers'];
     $city = $_POST['city'];
+    var_dump($_POST['city']);
     $state = $_POST['state'];
 
     // File upload handling

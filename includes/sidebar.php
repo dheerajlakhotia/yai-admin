@@ -45,6 +45,13 @@
                 <span>Volenteer</span>
             </a>
         </li><!-- End volenteer Page Nav -->
+        <li class="nav-item">
+            <a class="nav-link <?php if($active_page == 'Testimonial') echo 'active'; ?> collapsed"
+                href="testimonial.php">
+                <i class="bi bi-yelp"></i>
+                <span>Testimonial</span>
+            </a>
+        </li><!-- End volenteer Page Nav -->
 
 
         <li class="nav-item">
@@ -86,8 +93,16 @@
             <a class="nav-link <?php if($active_page == 'faq') echo 'active'; ?> collapsed" href="faq.php">
                 <i class="bi bi-question-circle"></i>
                 <span>F.A.Q</span>
+
             </a>
         </li><!-- End F.A.Q Page Nav -->
+        <li class="nav-item">
+            <a class="nav-link <?php if($active_page == 'terms-conditions') echo 'active'; ?> collapsed"
+                href="terms-conditions.php">
+                <i class="bi bi-file-earmark-text-fill"></i>
+                <span>Terms and Condition</span>
+            </a>
+        </li>
         <li class="nav-item">
             <a class="nav-link <?php if($active_page == 'settings') echo 'active'; ?> collapsed" href="settings.php">
                 <i class="bi bi-gear"></i>
@@ -169,6 +184,13 @@
                 <span>F.A.Q</span>
             </a>
         </li><!-- End F.A.Q Page Nav -->
+        <li class="nav-item">
+            <a class="nav-link <?php if($active_page == 'terms-conditions') echo 'active'; ?> collapsed"
+                href="terms-conditions.php">
+                <i class="bi bi-file-earmark-text-fill"></i>
+                <span>Terms and Condition</span>
+            </a>
+        </li>
 
 
 
@@ -220,6 +242,14 @@
                 <span>F.A.Q</span>
             </a>
         </li><!-- End F.A.Q Page Nav -->
+        <li class="nav-item">
+            <a class="nav-link <?php if($active_page == 'terms-conditions') echo 'active'; ?> collapsed"
+                href="terms-conditions.php">
+                <i class="bi bi-file-earmark-text-fill"></i>
+                <span>Terms and Condition</span>
+            </a>
+        </li>
+
 
 
 

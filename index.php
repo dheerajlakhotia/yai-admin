@@ -115,43 +115,7 @@ $rank = 1;
         </div><!-- End Member Card -->
 
 
-        <?php
-// Assuming you have already established a database connection
 
-// Query to fetch the fund amount from the database
-$query = "SELECT amount FROM funds LIMIT 1"; // Assuming you only have one row in the funds table
-
-$result = mysqli_query($conn, $query);
-
-if (mysqli_num_rows($result) > 0) {
-    $row = mysqli_fetch_assoc($result);
-    $fundAmount = $row['amount'];
-} else {
-    $fundAmount = "N/A"; // If no data found in the funds table
-}
-
-
-?>
-
-        <!-- Revenue Card -->
-        <div class="col-xxl-4 col-md-6">
-            <div class="card info-card revenue-card">
-                <div class="card-body">
-                    <h5 class="card-title">Total Fund<span>
-
-                            <div class="d-flex align-items-center">
-                                <div
-                                    class="card-icon rounded-circle d-flex align-items-center justify-content-center mt-3">
-                                    <i class="bi bi-currency-rupee"></i>
-                                </div>
-                                <div class="ps-3 mt-3">
-                                    <h6><?php echo $fundAmount; ?></h6>
-                                </div>
-                            </div>
-                </div>
-
-            </div>
-        </div><!-- End Revenue Card -->
 
         <!-- childenes Card -->
         <div class="col-xxl-4 col-xl-12">

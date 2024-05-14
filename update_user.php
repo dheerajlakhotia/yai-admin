@@ -1,9 +1,6 @@
-<?php require'includes/header.php'?>
-
-<?php require'includes/navbar.php'?>
-
-<?php require'includes/sidebar.php'?>
-
+<?php require 'includes/header.php' ?>
+<?php require 'includes/navbar.php' ?>
+<?php require 'includes/sidebar.php' ?>
 
 <?php
 // Initialize user_id variable
@@ -48,6 +45,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Map role names to role IDs
         $role_id = null;
         switch ($role_name) {
+            case 'Founding Member':
+                $role_id = 1;
+                break;
             case 'HOD':
                 $role_id = 2;
                 break;
@@ -118,26 +118,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (mysqli_stmt_execute($stmt)) {
             echo "User details updated successfully.";
         } else {
-           
+            // Handle the case where the query fails
         }
-
-       
     }
-} // <-- Don't forget to close the outermost if block
+}
 ?>
-
-
 
 <?php
 // Check if user ID is provided in the URL
-if(isset($_GET['id'])) {
+if (isset($_GET['id'])) {
     $user_id = $_GET['id'];
-    
+
     // Fetch user details from the database based on the ID
     $query = "SELECT * FROM yai_users WHERE id = $user_id";
     $result = mysqli_query($conn, $query);
-    
-    if(mysqli_num_rows($result) == 1) {
+
+    if (mysqli_num_rows($result) == 1) {
         $row = mysqli_fetch_assoc($result);
     } else {
         echo "User not found";
@@ -150,8 +146,6 @@ if(isset($_GET['id'])) {
 ?>
 
 <main id="main" class="main">
-
-
     <form method="post" enctype="multipart/form-data" action="">
         <!-- Add a hidden input field to store user ID -->
         <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
@@ -177,29 +171,31 @@ if(isset($_GET['id'])) {
             <label>Gender <span style="color: red;">*</span></label><br>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="gender" id="male" value="Male"
-                    <?php if($row['gender'] == 'Male') echo 'checked'; ?>>
+                    <?php if ($row['gender'] == 'Male') echo 'checked'; ?>>
                 <label class="form-check-label" for="male">Male</label>
             </div>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="gender" id="female" value="Female"
-                    <?php if($row['gender'] == 'Female') echo 'checked'; ?>>
+                    <?php if ($row['gender'] == 'Female') echo 'checked'; ?>>
                 <label class="form-check-label" for="female">Female</label>
             </div>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="gender" id="other" value="Other"
-                    <?php if($row['gender'] == 'Other') echo 'checked'; ?>>
+                    <?php if ($row['gender'] == 'Other') echo 'checked'; ?>>
                 <label class="form-check-label" for="other">Other</label>
             </div>
         </div>
+
         <div class="form-group">
             <label for="exampleInputEmail1">Email address <span style="color: red;">*</span></label>
             <input type="email" class="form-control" id="exampleInputEmail1" name="exampleInputEmail1"
                 placeholder="Enter email" value="<?php echo $row['email']; ?>">
         </div>
+
         <div class="form-group">
-            <label for="exampleInputEmail1">Password <span style="color: red;">*</span></label>
-            <input type="password" class="form-control" id="examplepassword" name="examplepassword"
-                placeholder="Enter password" value="<?php echo $row['password']; ?>">
+            <label for="exampleInputPassword1">Password <span style="color: red;">*</span></label>
+            <input type="password" class="form-control" id="exampleInputPassword1" name="exampleInputPassword1"
+                placeholder="Password">
         </div>
 
         <div class="form-group">
@@ -222,14 +218,14 @@ if(isset($_GET['id'])) {
         <div class="form-group">
             <label for="occupation">Occupation <span style="color: red;">*</span></label>
             <select class="form-control" id="occupation" name="occupation">
-                <option value="" <?php if($row['occupation'] == '') echo 'selected'; ?>>Choose...</option>
-                <option value="student" <?php if($row['occupation'] == 'student') echo 'selected'; ?>>Student</option>
-                <option value="teacher" <?php if($row['occupation'] == 'teacher') echo 'selected'; ?>>Teacher</option>
-                <option value="engineer" <?php if($row['occupation'] == 'engineer') echo 'selected'; ?>>Engineer
+                <option value="" <?php if ($row['occupation'] == '') echo 'selected'; ?>>Choose...</option>
+                <option value="student" <?php if ($row['occupation'] == 'student') echo 'selected'; ?>>Student</option>
+                <option value="teacher" <?php if ($row['occupation'] == 'teacher') echo 'selected'; ?>>Teacher</option>
+                <option value="engineer" <?php if ($row['occupation'] == 'engineer') echo 'selected'; ?>>Engineer
                 </option>
-                <option value="doctor" <?php if($row['occupation'] == 'doctor') echo 'selected'; ?>>Doctor</option>
-                <option value="artist" <?php if($row['occupation'] == 'artist') echo 'selected'; ?>>Artist</option>
-                <option value="business" <?php if($row['occupation'] == 'business') echo 'selected'; ?>>Business
+                <option value="doctor" <?php if ($row['occupation'] == 'doctor') echo 'selected'; ?>>Doctor</option>
+                <option value="artist" <?php if ($row['occupation'] == 'artist') echo 'selected'; ?>>Artist</option>
+                <option value="business" <?php if ($row['occupation'] == 'business') echo 'selected'; ?>>Business
                 </option>
             </select>
         </div>
@@ -237,13 +233,13 @@ if(isset($_GET['id'])) {
         <div class="form-group">
             <label for="idType">Select Identification Type <span style="color: red;">*</span></label>
             <select class="form-control" id="idType" name="idType">
-                <option value="" <?php if($row['id_type'] == '') echo 'selected'; ?>>Choose...</option>
-                <option value="passport" <?php if($row['id_type'] == 'passport') echo 'selected'; ?>>Passport</option>
-                <option value="driverLicense" <?php if($row['id_type'] == 'driverLicense') echo 'selected'; ?>>Driver's
-                    License</option>
-                <option value="nationalId" <?php if($row['id_type'] == 'nationalId') echo 'selected'; ?>>National ID
+                <option value="" <?php if ($row['id_type'] == '') echo 'selected'; ?>>Choose...</option>
+                <option value="passport" <?php if ($row['id_type'] == 'passport') echo 'selected'; ?>>Passport</option>
+                <option value="driverLicense" <?php if ($row['id_type'] == 'driverLicense') echo 'selected'; ?>>
+                    Driver's License</option>
+                <option value="nationalId" <?php if ($row['id_type'] == 'nationalId') echo 'selected'; ?>>National ID
                 </option>
-                <option value="other" <?php if($row['id_type'] == 'other') echo 'selected'; ?>>Other</option>
+                <option value="other" <?php if ($row['id_type'] == 'other') echo 'selected'; ?>>Other</option>
             </select>
         </div>
 
@@ -255,7 +251,8 @@ if(isset($_GET['id'])) {
         </div>
 
         <div id="idProofPreview" class="mb-3" style="display: none;">
-            <img id="idProofPreviewImg" src="" alt="ID Proof Preview" style="max-width: 100px; max-height: 100px;">
+            <img id="idProofPreviewImg" src="<?php echo $row['id_image']; ?>" alt="ID Proof Preview"
+                style="max-width: 100px; max-height: 100px;">
             <button type="button" class="btn btn-outline-danger btn-sm ml-2"
                 onclick="deleteImage('idProof')">Delete</button>
         </div>
@@ -265,19 +262,22 @@ if(isset($_GET['id'])) {
             <input type="text" class="form-control" id="exampleInputHobbies" name="exampleInputHobbies"
                 placeholder="Enter your hobbies or skills" value="<?php echo $row['hobbies']; ?>">
         </div>
+
         <div class="form-group">
             <div class="form-group">
                 <label for="role">Role</label>
                 <select class="form-select" aria-label="Select Role" name="role">
-                    <option value="" <?php if($row['role_id'] == '') echo 'selected'; ?>>Open this select menu</option>
-                    <option value="Volunteer" <?php if($row['role_id'] == 'Volunteer') echo 'selected'; ?>>Volunteer
+                    <option value="" <?php if ($row['role_id'] == '') echo 'selected'; ?>>Open this select menu</option>
+                    <option value="Founding Member" <?php if ($row['role_id'] == 'Founding Member') echo 'selected'; ?>>
+                        Founding Member
                     </option>
-                    <option value="intern" <?php if($row['role_id'] == 'intern') echo 'selected'; ?>>Intern</option>
-                    <option value="HOD" <?php if($row['role_id'] == 'HOD') echo 'selected'; ?>>HOD</option>
-                    <option value="C.M." <?php if($row['role_id'] == 'C.M.') echo 'selected'; ?>>C.M.</option>
+                    <option value="Volunteer" <?php if ($row['role_id'] == 'Volunteer') echo 'selected'; ?>>Volunteer
+                    </option>
+                    <option value="intern" <?php if ($row['role_id'] == 'intern') echo 'selected'; ?>>Intern</option>
+                    <option value="HOD" <?php if ($row['role_id'] == 'HOD') echo 'selected'; ?>>HOD</option>
+                    <option value="C.M." <?php if ($row['role_id'] == 'C.M.') echo 'selected'; ?>>C.M.</option>
                 </select>
             </div>
-
         </div>
 
         <div class="form-check">
@@ -288,10 +288,6 @@ if(isset($_GET['id'])) {
 
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-
-
-
 </main>
-
 
 <?php include 'includes/footer.php' ?>

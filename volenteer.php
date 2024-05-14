@@ -271,18 +271,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     </div>
     </div>
-    <!-- Display users' details -->
     <?php
+
 // Check if search form is submitted
 if (isset($_GET['search'])) {
     // Sanitize the input
     $search = mysqli_real_escape_string($conn, $_GET['search']);
 
-    // Query to fetch data from the database based on the search input
-    $query = "SELECT * FROM yai_users WHERE name LIKE '%$search%'";
+    // Query to fetch data from the database based on the search input and status = 1
+    $query = "SELECT * FROM yai_users WHERE (name LIKE '%$search%' OR email LIKE '%$search%' OR mobile LIKE '%$search%') AND status = 1";
 } else {
-    // Default query to fetch all data
-    $query = "SELECT * FROM yai_users";
+    // Default query to fetch data with status = 1
+    $query = "SELECT * FROM yai_users WHERE status = 1";
 }
 
 // Execute the query
@@ -296,7 +296,13 @@ if ($result) {
             <h5 class="card-title">All YAI Members Details</h5>
 
             <!-- Search form -->
-            <!-- Your existing search form goes here -->
+            <form method="GET" action="">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search by name, email, or mobile number"
+                        name="search">
+                    <button class="btn btn-outline-secondary" type="submit">Search</button>
+                </div>
+            </form>
 
             <!-- Display total number of members -->
             <span>Total Members: <?php echo mysqli_num_rows($result); ?></span>
@@ -317,7 +323,9 @@ if ($result) {
                             <th scope="col">DOB</th>
                             <th scope="col">Occupation</th>
                             <th scope="col">ID Type</th>
+                            <?php if ($_SESSION['role_id'] != 2 && $_SESSION['role_id'] != 5): ?>
                             <th scope="col">ID Image</th>
+                            <?php endif; ?>
                             <th scope="col">Hobbies</th>
                             <th scope="col">Role</th>
                             <!-- Add 'Operations' column header -->
@@ -349,11 +357,13 @@ if ($result) {
                             <td><?php echo $row['dob']; ?></td>
                             <td><?php echo $row['occupation']; ?></td>
                             <td><?php echo $row['id_type']; ?></td>
+                            <?php if ($_SESSION['role_id'] != 2 && $_SESSION['role_id'] != 5): ?>
                             <td>
                                 <!-- Display image preview -->
                                 <img src="<?php echo $row['id_image']; ?>" alt="User Image" class="img-thumbnail"
                                     width="100">
                             </td>
+                            <?php endif; ?>
                             <td><?php echo $row['hobbies']; ?></td>
                             <td>
                                 <?php
@@ -380,7 +390,7 @@ if ($result) {
                                         ?>
                             </td>
                             <!-- Display edit and delete options only for role_id 1 -->
-                            <?php if ($_SESSION['role_id'] == 1): ?>
+                            <?php if ($_SESSION['role_id'] == 1 && $_SESSION['role_id'] != 2 && $_SESSION['role_id'] != 5): ?>
                             <td>
                                 <!-- Edit icon -->
                                 <a href="update_user.php?id=<?php echo $row['id']; ?>" class="btn btn-link">
